@@ -1,0 +1,30 @@
+.tabs {
+    width: 100%;
+}
+
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 2px solid #ffffff4f;
+}
+
+.tabs-nav div {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    width: 150px;
+    cursor: pointer;
+}
+
+.active-item {
+    border-bottom: 2px solid #fff;
+}
+
+.transactions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 130px;
+    opacity: 0.5;
+}

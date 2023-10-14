@@ -1,0 +1,91 @@
+.table-title {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    color: var(--text-secondary);
+}
+
+.table-item {
+    display: flex;
+    align-items: center;
+    background: var(--tableItem);
+    padding: 11px 15px;
+}
+
+.table-item__icon {
+    display: flex;
+    width: 30px;
+    height: 30px;
+}
+
+.table-item__search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    margin-left: 13px;
+    width: 200px;
+    color: #FFFFFF;
+}
+
+
+.table-item:nth-child(odd) {
+    background: var(--bg);
+}
+
+.table-item__balance {
+    width: 250px;
+}
+
+.table-item__balance .total {
+    color: #FFFFFF;
+}
+
+.table-item__balance .symbol {
+    color: #ffffff7a;
+}
+
+.table-item__value {
+    width: 120px;
+    text-align: right;
+    color: #FFFFFF;
+}
+
+.table-item__price {
+    width: 150px;
+    text-align: right;
+    color: #ffffff7a;
+}
+
+.table-item__24h {
+    width: 120px;
+    text-align: right;
+}
+
+.table-item__24h.red {
+    color: #FE3333;
+}
+
+.table-item__24h.green {
+    color: #00FF47;
+}
+
+.table-item__portfolio {
+    width: 120px;
+    text-align: right;
+    color: #ffffff7a;
+}
+
+.table-item__mCap {
+    width: 120px;
+    text-align: right;
+    color: #ffffff7a;
+}
+
+.table-item__chart {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 150px;
+    text-align: right;
+}

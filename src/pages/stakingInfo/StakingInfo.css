@@ -1,0 +1,77 @@
+.stakingInfo {
+
+}
+
+.stakingInfo .back {
+    
+}
+
+.stakingInfo .content {
+    max-width: 424px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.stakingInfo .content img {
+    width: 72px;
+    margin-bottom: 10px;
+}
+
+.stakingInfo .content h4 {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0px;
+}
+
+.stakingInfo .content h4 span {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 48px;
+    letter-spacing: 0px;
+    margin-right: 6px;
+}
+
+.stakingInfo .content .yearly {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0px;
+    color: #00FF47;
+    margin-bottom: 36px;
+}
+
+.stakingInfo .content .infoList {
+    width: 100%;
+}
+
+.stakingInfo .content .infoList .info {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.stakingInfo .content .infoList .info .indicator {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 39px;
+    letter-spacing: 0px;
+    flex-grow: 1;
+}
+
+.stakingInfo .content .infoList .info .total {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 39px;
+    letter-spacing: 0px;
+    margin-right: 8px;
+}
+
+.stakingInfo .content .infoList .info .nameCrypto {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 39px;
+    letter-spacing: 0px;
+    color: #FFFFFF80;
+}

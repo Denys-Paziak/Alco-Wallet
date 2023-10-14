@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+:root {
+  --bg: #1D1841;
+  --main: #EB00FF;
+  --tableItem: rgba(47, 40, 89, 0.56);
+  --text: #fff;
+  --text-secondary: #9c9c9c;
+  --secondary: #120C34;
+  --BLUE_main: #2F0DFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  padding: 0px 0px 0px 185px;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  display: inline-flex;
+  padding: 23px 80px;
+  align-items: flex-start;
+  gap: 34px;
+  color: var(--text);
+  font-size: 20px;
+  border-radius: 16px;
+  background: var(--BLUE_main);
+  transition: 0.6s;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--main);
+  color: var(--text);
+}
+
+input {
+  background: var(--secondary);
+  color: var(--text);
+  outline: none;
+  padding: 5px;
+  width: 400px;
+}
+
+
+
+.title {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.icon-cripto {
+  width: 30px;
+  height: 30px;
+}
+
+
+.notification {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.notification.success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.notification.error {
+  background-color: #f44336;
+  color: white;
+}

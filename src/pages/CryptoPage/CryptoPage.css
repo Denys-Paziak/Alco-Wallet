@@ -1,0 +1,46 @@
+.cryptoPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.nameCrypto {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nameCrypto img {
+    width: 56px;
+    height: 56px;
+}
+
+.сtyptoButtons {
+    display: flex;
+    gap: 50px;
+    padding: 20px 60px;
+    gap: 34px;
+    margin-top: 20px;
+}
+
+.сtyptoButtons button {
+    border-radius: 16px;
+    border: 2px solid var(--white, #FFF);
+    background: #120C34;
+}
+
+.balanceInfo {
+    margin-top: 30px;
+}
+
+.balanceInfo__USD,
+.balanceInfo__crypto {
+    display: flex;
+    font-size: 30px;
+}
+
+.balanceInfo .gray {
+    opacity: 0.5;
+}

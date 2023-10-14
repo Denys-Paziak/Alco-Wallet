@@ -1,0 +1,109 @@
+.staking {
+    padding: 26px 30px;
+}
+
+h2 {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0.015em;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0px;
+    text-align: left;
+    margin-bottom: 48px;
+}
+
+.explanation {
+    display: flex;
+    justify-content: space-between;
+    max-width: 840px;
+    margin-bottom: 70px;
+}
+
+.arrow {
+    width: 30px;
+}
+
+.explanation .stage {
+    
+}
+
+.explanation .stage .titleStage {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.explanation .stage .available {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #FFFFFF99;
+}
+
+.explanation .stage .staked {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #FFFFFF99;
+}
+
+.crypto {
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+.crypto .cryptoCard {
+    border-radius: 16px;
+    background: #312B5699;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    width: 112px;
+    height: 152px;
+}
+
+.crypto .cryptoCard .link {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 17px 12px 16px;
+}
+
+.crypto .cryptoCard img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 7px;
+}
+
+.crypto .cryptoCard h4 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0px;
+    text-align: right;
+    color: #ffffff8e;
+    margin-bottom: 14px;
+}
+
+.crypto .cryptoCard p {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0.015em;
+    color: #ffffff;
+    text-align: left;
+}

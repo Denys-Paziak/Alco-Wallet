@@ -1,0 +1,66 @@
+.replenishmentPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.crypto-form {
+    display: flex;
+    margin-top: 150px;
+}
+
+.crypto-form .row {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.crypto-form .right,
+.crypto-form .left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.crypto-form__img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 84px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.crypto-form__input {
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--text);
+    font-size: 24px;
+}
+
+.crypto-form .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.arrow {
+    font-size: 20px;
+    margin: 0 20px;
+}
+
+.crypto-form__button {
+    margin-top: 20px;
+}
+
+.crypto-form__text {
+    margin-top: 50px;
+    width: 370px;
+    line-height: 42px;
+}
+
+.reward-text {
+    margin-top: 10px;
+    text-align: left;
+    width: 100%;
+}
