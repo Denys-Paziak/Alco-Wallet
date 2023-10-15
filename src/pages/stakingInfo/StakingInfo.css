@@ -1,6 +1,9 @@
 .stakingInfo {
+    display: flex;
+    justify-content: center;
     position: relative;
     padding: 90px 0 0;
+    margin: 0 auto;
 }
 
 .stakingInfo .back {
@@ -10,11 +13,11 @@
 }
 
 .stakingInfo .content {
-    max-width: 424px;
-    margin: 0 auto;
+    min-width: 424px;
     display: flex;
     flex-direction: column;
     align-items:center;
+    margin-right: 50px;
 }
 
 .stakingInfo .content img {
@@ -48,11 +51,12 @@
 
 .stakingInfo .content .infoList {
     width: 100%;
+    margin-bottom: 30px;
 }
 
 .stakingInfo .content .infoList .info {
     display: flex;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .stakingInfo .content .infoList .info .indicator {
@@ -80,17 +84,93 @@
 }
 
 .stakingInfo .buttonsStake {
-
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
-.stakingInfo .buttonsStake .stake {
+.stakingInfo .buttonsStake .stakeCrypto {
+    display: flex;
+    align-items:center;
+    justify-content: center;
     width: 200px;
-    height: 50px;
+    height: 60px;
     border-radius: 16px;
-    font-size: 14px;
-    text-wrap: nowrap;
+    font-size: 17px;
+    padding: 0;
+    font-weight: 700;
+    letter-spacing: 0.015em;
+    background: #EB00FF;
 }
 
-.stakingInfo .buttons .unstake {
-    
+.stakingInfo .buttonsStake .unstake {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    width: 200px;
+    height: 60px;
+    border-radius: 16px;
+    font-size: 17px;
+    padding: 0;
+    font-weight: 700;
+    letter-spacing: 0.015em;
+    border: 2px solid #FFFFFF;
+    background: inherit;
+}
+
+.stakingInfo .sideButtons {
+    display: flex;
+    flex-direction: column;
+    padding-top: 230px;
+}
+
+.stakingInfo .sideButtons .sideStake{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    width: 152px;
+    height: 43px;
+    border-radius: 16px;
+    border: 2px solid #FFFFFF66;
+    background:inherit;
+    padding: 0;
+    margin-bottom: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0.015em;
+}
+
+.stakingInfo .sideButtons .sideRedelegate {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    width: 152px;
+    height: 43px;
+    border-radius: 16px;
+    border: 2px solid #FFFFFF66;
+    background:inherit;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0.015em;
+    margin-bottom: 25px;
+}
+
+.stakingInfo .sideButtons .sideClaim {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    width: 152px;
+    height: 43px;
+    border-radius: 16px;
+    border: 2px solid #FFFFFF66;
+    background:inherit;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0.015em;
+    margin-bottom: 25px;
 }

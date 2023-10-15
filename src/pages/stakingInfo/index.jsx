@@ -9,6 +9,7 @@ export default function StakingInfo() {
     const { name } = useParams();
 
     const staking  = useSelector(state => state.staking.staking);
+    const stakingUser  = useSelector(state => state.user.staking);
     const crypto  = useSelector(state => state.user.cryptoBalance);
 
     const data = staking.find(item => item.name === name);
@@ -32,31 +33,37 @@ export default function StakingInfo() {
                     </div>
                     <div className="info">
                         <p className='indicator'>Available</p>
-                        <p className='total'>0</p>
+                        <p className='total'>{(crypto?.[name]?.total - stakingUser?.[name]?.total) || 0}</p>
                         <p className='nameCrypto'>{nameUpperCase}</p>
                     </div>
                     <div className="info">
                         <p className='indicator'>Staked</p>
-                        <p className='total'>0</p>
+                        <p className='total'>{stakingUser?.[name]?.total || 0}</p>
                         <p className='nameCrypto'>{nameUpperCase}</p>
                     </div>
                     <div className="info">
                         <p className='indicator'>Rewards</p>
-                        <p className='total'>0</p>
+                        <p className='total'>{stakingUser?.[name]?.rewards || 0}</p>
                         <p className='nameCrypto'>{nameUpperCase}</p>
                     </div>
                     <div className="info">
                         <p className='indicator'>Unbounding</p>
-                        <p className='total'>0</p>
+                        <p className='total'>{(stakingUser?.[name]?.total + stakingUser?.[name]?.rewards) || 0}</p>
                         <p className='nameCrypto'>{nameUpperCase}</p>
                     </div>
                 </div>
                 <div className='buttonsStake'>
-                    <button className='stake'>Stake {nameUpperCase}</button>
+                    <Link to={"stake"}>
+                        <button className='stakeCrypto'>Stake {nameUpperCase}</button>
+                    </Link>
                     <button className='unstake'>Unstake</button>
                 </div>
             </div>
-            
+            <div className='sideButtons'>
+                <button className='sideStake'>Stake</button>
+                <button className='sideRedelegate'>Redelegate</button>
+                <button className='sideClaim'>Claim</button>
+            </div>
         </div>
     )
 }

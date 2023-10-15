@@ -2,10 +2,10 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { useEffect } from "react";
 
-import { MainPage, ReplenishmentPage, ConvertationPage, BuyUSD, StakingPage, StakingInfo, CryptoPage } from "./pages";
+import { MainPage, ReplenishmentPage, ConvertationPage, BuyUSD, StakingPage, StakingInfo, CryptoPage, StakedPage } from "./pages";
 import Menu from './Components/Menu/Menu';
 
-import { setUSDBalance, setCryptoBalance, setTRDBalance } from "./slices/userSlice";
+import { setUSDBalance, setCryptoBalance, setTRDBalance, setUserStaking } from "./slices/userSlice";
 import { setMarket } from "./slices/marketSlice";
 import { setStaking } from "./slices/stakingSlice";
 import { setChart7DaysAllCrypto } from "./slices/chartSlice"
@@ -26,6 +26,9 @@ function App() {
     server.getTRDBalance().then((data) => {
       dispatch(setTRDBalance(data.balanceTRD));
     });
+    server.getUserStaking().then((data) => {
+      dispatch(setUserStaking(data.userStaking));
+    });
     server.getListCrypto().then((data) => {
       dispatch(setMarket(data));
     });
@@ -36,7 +39,6 @@ function App() {
       dispatch(setChart7DaysAllCrypto(data.body));
     });
   }, [])
-
 
   return (
     <Router>
@@ -49,6 +51,7 @@ function App() {
           <Route path="buyUSD" element={<BuyUSD />} />
           <Route path="staking" element={<StakingPage />} />
           <Route path="staking/:name" element={<StakingInfo />} />
+          <Route path="staking/:name/stake" element={<StakedPage />} />
         </Routes>
         <Menu />
       </div>

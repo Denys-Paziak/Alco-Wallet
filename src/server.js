@@ -57,6 +57,17 @@ export const getStakingCrypto = async () => {
     }
 }
 
+export const getUserStaking = async () => {
+    try {
+        const response = await axios.get(`${host}/user/staking`);
+        return response.data;
+    } catch (error) {
+        // Обробка помилки
+        console.error("Помилка при отриманні списку користувачів криптовалют:", error);
+        throw error;
+    }
+}
+
 export const buyCrypto = async (name, total) => {
     try {
         const response = await axios.patch(`${host}/buy`, { name, total });

@@ -21,12 +21,12 @@ export const userSlice = createSlice({
         setTRDBalance: (state, action) => {
             state.TRDBalance = action.payload
         },
-        setStaking: (state, action) => {
+        setUserStaking: (state, action) => {
             state.staking = action.payload
         }
     }
 })
 
-export const { setUSDBalance, setCryptoBalance, setTRDBalance, setStaking } = userSlice.actions
+export const { setUSDBalance, setCryptoBalance, setTRDBalance, setUserStaking } = userSlice.actions
 
 export default userSlice.reducer
