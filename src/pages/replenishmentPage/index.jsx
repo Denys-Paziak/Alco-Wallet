@@ -4,14 +4,14 @@ import CurrencyDropdown from '../../Components/CurrencyDropdown/CurrencyDropdown
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setUSDBalance, setCryptoBalance } from "../../slices/userSlice";
-import {getBalance, getListUserCrypto, buyCrypto} from '../../server';
+import { getBalance, getListUserCrypto, buyCrypto } from '../../server';
 
 import CriptoForm from "../../Components/CryptoForm/CriptoForm";
 
 import "./Replenishment.css";
 
 const ReplenishmentPage = () => {
-    const market  = useSelector(state => state.market.market);
+    const market = useSelector(state => state.market.market);
 
     const [selectedCripto, setSelectedCripto] = useState(market[0]);
     const [userSelectCripto, setUserCripto] = useState({ symbol: "usd", image: "/USD.png" });
@@ -88,7 +88,7 @@ const ReplenishmentPage = () => {
             </div>
             <p className='crypto-form__text'>5% fees (min 10 USD) are included in the price The average delivery time is 10 to 30 minutes</p>
 
-            <div className='row'>
+            <div className='checkbox-container'>
                 <input type="checkbox"></input>
                 <p>I agree to the Terms of Service</p>
             </div>

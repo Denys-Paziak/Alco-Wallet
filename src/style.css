@@ -50,10 +50,7 @@ input {
   color: var(--text);
   outline: none;
   padding: 5px;
-  width: 400px;
 }
-
-
 
 .title {
   font-weight: bold;

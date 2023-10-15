@@ -28,6 +28,21 @@
     color: #FFFFFF;
 }
 
+.table-item__search input {
+    margin: 0;
+    padding: 0;
+    background: none;
+    outline: none;
+    border: none;
+    color: #FFF;
+
+    font-family: "Poppins";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
 
 .table-item:nth-child(odd) {
     background: var(--bg);
