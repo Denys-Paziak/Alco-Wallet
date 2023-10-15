@@ -23,30 +23,7 @@ ChartJS.register(
     Filler,
 );
 
-export const options = {
-    responsive: true,
-    pointStyle: false,
-    scales: {
-        y: {
-            display: false, // Вимкнути вісь y
-        },
-    },
-};
-
 const labels = ['', '', '', '', '', '', ''];
-
-export const data = {
-    labels,
-    datasets: [
-        {
-            label: 'Dataset 2',
-            data: ["0.12644", "0.13637", "0.64851", "0.56142", "0.43196", "0.45457", "0.39907"],
-            borderColor: 'rgb(53, 162, 235)',
-            fill: false, // Вимкнути заповнення
-        },
-    ],
-
-};
 
 export default function MainPage() {
     const market = useSelector(state => state.market.market);

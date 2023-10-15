@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { MainPage, ReplenishmentPage, ConvertationPage, BuyUSD, StakingPage, StakingInfo, CryptoPage } from "./pages";
 import Menu from './Components/Menu/Menu';
 
-import { setUSDBalance, setCryptoBalance } from "./slices/userSlice";
+import { setUSDBalance, setCryptoBalance, setTRDBalance } from "./slices/userSlice";
 import { setMarket } from "./slices/marketSlice";
 import { setStaking } from "./slices/stakingSlice";
 import { setChart7DaysAllCrypto } from "./slices/chartSlice"
@@ -22,6 +22,9 @@ function App() {
     });
     server.getListUserCrypto().then((data) => {
       dispatch(setCryptoBalance(data.balanceCrypto));
+    });
+    server.getTRDBalance().then((data) => {
+      dispatch(setTRDBalance(data.balanceTRD));
     });
     server.getListCrypto().then((data) => {
       dispatch(setMarket(data));

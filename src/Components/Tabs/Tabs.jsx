@@ -83,19 +83,19 @@ const PriceChart = ({name}) => {
     }, []);
 
     const data = {
-        labels: [4, 5],
+        labels: labelCharts.slice(-7),
         datasets: [
             {
-                label: labelCharts,
-                data: dataCharts,
+                data: dataCharts.slice(-7),
                 borderColor: 'rgb(53, 162, 235)',
+                fill: 'start'
             },
         ],
 
     };
 
     return (
-        <div>
+        <div style={{ width: "100%", height: "50px" }}>
             <Line
                 options={options}
                 data={data}

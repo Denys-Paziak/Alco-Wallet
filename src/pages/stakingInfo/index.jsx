@@ -6,8 +6,10 @@ import arrowBack from "./arrow_back.svg";
 import "./StakingInfo.css"
 
 export default function StakingInfo() {
-    const staking  = useSelector(state => state.staking.staking);
     const { name } = useParams();
+
+    const staking  = useSelector(state => state.staking.staking);
+    const crypto  = useSelector(state => state.user.cryptoBalance);
 
     const data = staking.find(item => item.name === name);
 
@@ -25,7 +27,7 @@ export default function StakingInfo() {
                 <div className='infoList'>
                     <div className="info">
                         <p className='indicator'>Total</p>
-                        <p className='total'>0</p>
+                        <p className='total'>{crypto?.[name]?.total || 0}</p>
                         <p className='nameCrypto'>{nameUpperCase}</p>
                     </div>
                     <div className="info">
@@ -49,7 +51,12 @@ export default function StakingInfo() {
                         <p className='nameCrypto'>{nameUpperCase}</p>
                     </div>
                 </div>
+                <div className='buttonsStake'>
+                    <button className='stake'>Stake {nameUpperCase}</button>
+                    <button className='unstake'>Unstake</button>
+                </div>
             </div>
+            
         </div>
     )
 }

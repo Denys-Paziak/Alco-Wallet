@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     USDBalance: 0,
-    cryptoBalance: {}
+    cryptoBalance: {},
+    TRDBalance: 0,
+    staking: {}
 }
 
 export const userSlice = createSlice({
@@ -16,9 +18,15 @@ export const userSlice = createSlice({
         setCryptoBalance: (state, action) => {
             state.cryptoBalance = action.payload
         },
+        setTRDBalance: (state, action) => {
+            state.TRDBalance = action.payload
+        },
+        setStaking: (state, action) => {
+            state.staking = action.payload
+        }
     }
 })
 
-export const { setUSDBalance, setCryptoBalance } = userSlice.actions
+export const { setUSDBalance, setCryptoBalance, setTRDBalance, setStaking } = userSlice.actions
 
 export default userSlice.reducer
