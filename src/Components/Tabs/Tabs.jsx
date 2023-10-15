@@ -4,7 +4,6 @@ import "./Tabs.css";
 import { getСhart } from '../../server';
 
 import { Line } from 'react-chartjs-2';
-
 const options = {
     responsive: true,
     pointStyle: false,
@@ -12,19 +11,19 @@ const options = {
 
 const menuItem = ["Transactions", "Price chart", "About"];
 
-export const Tabs = ({name}) => {
+export const Tabs = ({ name }) => {
     const [activeElMenu, setActiveElMenu] = useState(1);
     let showComponent;
 
-    if (activeElMenu == 0) {
+    if (activeElMenu === 0) {
         showComponent = <Transactions />
     }
 
-    if (activeElMenu == 1) {
-        showComponent = <PriceChart name={name}/>
+    if (activeElMenu === 1) {
+        showComponent = <PriceChart name={name} />
     }
 
-    if (activeElMenu == 2) {
+    if (activeElMenu === 2) {
         showComponent = <About />
     }
 
@@ -32,7 +31,7 @@ export const Tabs = ({name}) => {
         <div className="tabs">
             <div className='tabs-nav'>
                 {menuItem.map((el, index) => {
-                    if (index == activeElMenu) {
+                    if (index === activeElMenu) {
                         console.log(index)
                         return <div className='active-item'
                             onClick={() => { setActiveElMenu(index) }}
@@ -57,7 +56,7 @@ const Transactions = () => {
         </div>
     )
 }
-const PriceChart = ({name}) => {
+const PriceChart = ({ name }) => {
     const [labelCharts, setLabelCharts] = useState([]);
     const [dataCharts, setDataCharts] = useState([]);
 
@@ -82,17 +81,24 @@ const PriceChart = ({name}) => {
         fetchData();
     }, []);
 
+    const labels = ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', "2022", "2023"];
+
+    function generateRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     const data = {
-        labels: labelCharts.slice(-7),
+        labels,
         datasets: [
             {
-                data: dataCharts.slice(-7),
-                borderColor: 'rgb(53, 162, 235)',
-                fill: 'start'
+                label: 'Dataset 1',
+                data: labels.map(() => generateRandomNumber(-1000, 1000)),
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
         ],
-
     };
+
 
     return (
         <div style={{ width: "100%", height: "50px" }}>

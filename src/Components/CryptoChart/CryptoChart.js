@@ -13,7 +13,7 @@ const CryptoChart = ({ chartData }) => {
     };
 
     return (
-        <div className='table-item__chart' style={{ width: "100%", height: "50px" }}>
+        <div className='table-item__chart'>
             <Line options={options} data={chartData} />
         </div>
     );
