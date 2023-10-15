@@ -34,6 +34,8 @@ export const options = {
     },
 };
 
+const labels = ['', '', '', '', '', '', ''];
+
 export default function MainPage() {
     const market = useSelector(state => state.market.market);
     const cryptoBalance = useSelector(state => state.user.cryptoBalance);

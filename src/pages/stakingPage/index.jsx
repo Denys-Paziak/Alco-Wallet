@@ -13,8 +13,6 @@ const StakingPage = () => {
 
     const dispatch = useDispatch();
 
-    console.log(staking);
-
     return (
         <div className='staking'>
             <h2>Stake and earn</h2>

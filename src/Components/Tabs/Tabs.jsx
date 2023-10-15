@@ -101,7 +101,7 @@ const PriceChart = ({ name }) => {
 
 
     return (
-        <div>
+        <div style={{ width: "100%", height: "50px" }}>
             <Line
                 options={options}
                 data={data}

@@ -13,6 +13,17 @@ export const getBalance = async () => {
     }
 }
 
+export const getTRDBalance = async () => {
+    try {
+        const response = await axios.get(`${host}/TRD/balance`);
+        return response.data;
+    } catch (error) {
+        // Обробка помилки
+        console.error("Помилка при отриманні балансу:", error);
+        throw error;
+    }
+}
+
 export const getListUserCrypto = async () => {
     try {
         const response = await axios.get(`${host}/crypto/balance`);
