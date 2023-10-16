@@ -1,35 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { BsArrowRightShort } from 'react-icons/bs';
 import { convertCrypto, getListUserCrypto } from '../../server';
 import CurrencyDropdown from '../../Components/CurrencyDropdown/CurrencyDropdown';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { setCryptoBalance } from "../../slices/userSlice";
 
 import CriptoForm from "../../Components/CryptoForm/CriptoForm";
 
+import arrow from "./arrow.svg";
+import checkImg from "./check.svg"
+
 import "./convertation.css"
 
-const ConvertationPage = () => {
-    const market  = useSelector(state => state.market.market);
+export default function ConvertationPage() {
     const user  = useSelector(state => state.user.cryptoBalance);
-    const [selectedCripto, setSelectedCripto] = useState(null);
-    const [userSelectCripto, setUserCripto] = useState(null);
-    const [convertPrice, setConvertPrice] = useState(1);
-    const [userPrice, setUserPrice] = useState(100);
+    const market  = useSelector(state => state.market.market);
+
+    const [userSelectCripto, setUserSelectCripto] = useState(null);
+    const [marketSelectCripto, setMarketSelectCripto] = useState(null);
+
+    const [marketInputPrice, setMarketInputPrice] = useState(0);
+    const [userInputPrice, setUserInputPrice] = useState(100);
+    const [check, setCheck] = useState(false);
+
     const [notification, setNotification] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (market !== 'load' && market) {
-            const selectCripto = market.find(el => el.symbol === (selectedCripto || market[0]).symbol);
-            if (selectCripto) {
-                setConvertPrice(userPrice / selectCripto.price);
-            }
+        if (market !== 'load' && Object.values(market).length !== 0 && user !== 'load' && Object.values(user).length !== 0) {
+            const userCripto = user.find(el => el.symbol === (userSelectCripto || user[0]).symbol);
+                
+            const dolar = userCripto.price * userInputPrice;
+
+            const marketCripto = market.find(el => el.symbol === (marketSelectCripto || market[0]).symbol);
+            
+            setMarketInputPrice(dolar / marketCripto.price);
         }
-    }, [selectedCripto, market, userPrice]);
+    }, [userSelectCripto, marketSelectCripto]);
 
 
     if (market === 'load' || user === 'load') {
@@ -39,15 +49,11 @@ const ConvertationPage = () => {
             </div>
         );
     } else {
-
-        console.log(market);
-        console.log(user);
-
         const buttonHandler = () => {
-            if (selectedCripto) {
+            if (marketSelectCripto) {
                 setIsLoading(true); // Починаємо завантаження
     
-                convertCrypto(userSelectCripto.name, selectedCripto.symbol, userPrice)
+                convertCrypto(userSelectCripto.name, marketSelectCripto.symbol, userInputPrice)
                     .then(() => {
                         getListUserCrypto().then((data) => {
                             dispatch(setCryptoBalance(data.balanceCrypto));
@@ -72,35 +78,56 @@ const ConvertationPage = () => {
             }, 3000);
         };
     
+        
+        function onClickCheckbox() {
+            setCheck((state) => !state);
+        }
+
         return (
             <div className="replenishmentPage">
             <div className='crypto-form'>
-                <div className="left">
-                    <img className='crypto-form__img' src={(userSelectCripto || Object.values(user)[0]).image} alt="" />
-                    <div className="row">
-                        <CriptoForm inputHandler={setUserPrice}
-                            inputValue={userPrice} />
-                        <CurrencyDropdown criptoList={user} selectedCripto={(userSelectCripto || Object.values(user)[0])} setSelectedCripto={setUserCripto} />
+
+                {
+                    Object.values(user).length !== 0 
+                    ?
+                    <div className="left">
+                        <img className='crypto-form__img' src={(userSelectCripto || Object.values(user)[0])?.image} alt="" />
+                        <div className="row">
+                            <CriptoForm inputHandler={setUserInputPrice}
+                                inputValue={userInputPrice} />
+                            <CurrencyDropdown criptoList={user} selectedCripto={(userSelectCripto || Object.values(user)[0])} setSelectedCripto={setUserSelectCripto} />
+                        </div>
                     </div>
-                </div>
+                    :
+                    <div className="left">
+                        <div className="col">
+                            <p>There is no cryptocurrency on your wallet.</p>
+                            <Link to='/replenishment' className='buy'>Would you like to buy?</Link>
+                        </div>
+                    </div>
+                }
+                
                 <div className="arrow">
-                    <BsArrowRightShort className="text-2xl text-gray-500" />
+                    <img src={arrow} alt="" />
                 </div>
                 <div className="right">
-                    <img className='crypto-form__img' src={(selectedCripto || market[0]).image} alt=""/>
+                    <img className='crypto-form__img' src={(marketSelectCripto || market[0]).image} alt=""/>
                     <div className="row">
-                        <CriptoForm inputHandler={setConvertPrice}
-                            inputValue={convertPrice} readOnly />
+                        <CriptoForm inputHandler={setMarketInputPrice}
+                            inputValue={marketInputPrice} readOnly />
     
-                        <CurrencyDropdown criptoList={market} selectedCripto={(selectedCripto || market[0])} setSelectedCripto={setSelectedCripto} />
+                        <CurrencyDropdown criptoList={market} selectedCripto={(marketSelectCripto || market[0])} setSelectedCripto={setMarketSelectCripto} />
                     </div>
-                    <p className="reward-text">Reward: {userPrice * 0.0303954} TRD</p>
                 </div>
             </div>
-            <p className='crypto-form__text'>5% fees (min 10 USD) are included in the price The average delivery time is 10 to 30 minutes</p>
+            <p className='crypto-form__text'>
+                {
+
+                }
+            </p>
     
-            <div className='row'>
-                <input type="checkbox"></input>
+            <div className='checkbox-container' onClick={onClickCheckbox}>
+                <div className="checkbox" >{check ? <img src={checkImg} alt="" /> : null}</div>
                 <p>I agree to the Terms of Service</p>
             </div>
             <button className="crypto-form__button"
@@ -118,5 +145,3 @@ const ConvertationPage = () => {
         );
     }
 };
-
-export default ConvertationPage;

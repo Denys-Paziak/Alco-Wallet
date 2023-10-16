@@ -14,7 +14,7 @@ const ReplenishmentPage = () => {
     const market = useSelector(state => state.market.market);
 
     const [selectedCripto, setSelectedCripto] = useState(null);
-    const [userSelectCripto, setUserCripto] = useState({ symbol: "usd", image: "/USD.png" });
+    const [userSelectCripto, setUserSelectCripto] = useState({ symbol: "usd", image: "/USD.png" });
     const [convertPrice, setConvertPrice] = useState(1);
     const [userPrice, setUserPrice] = useState(100);
     const [notification, setNotification] = useState(null);
@@ -79,7 +79,7 @@ const ReplenishmentPage = () => {
                         <div className="row">
                             <CriptoForm inputHandler={setUserPrice}
                                 inputValue={userPrice} />
-                            <CurrencyDropdown criptoList={[userSelectCripto]} selectedCripto={userSelectCripto} setSelectedCripto={setUserCripto} />
+                            <CurrencyDropdown criptoList={[userSelectCripto]} selectedCripto={userSelectCripto} setSelectedCripto={setUserSelectCripto} />
                         </div>
                     </div>
                     <div className="arrow">
