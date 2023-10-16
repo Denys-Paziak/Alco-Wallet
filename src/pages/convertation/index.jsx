@@ -39,6 +39,10 @@ const ConvertationPage = () => {
             </div>
         );
     } else {
+
+        console.log(market);
+        console.log(user);
+
         const buttonHandler = () => {
             if (selectedCripto) {
                 setIsLoading(true); // Починаємо завантаження

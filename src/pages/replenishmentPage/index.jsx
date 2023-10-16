@@ -28,7 +28,6 @@ const ReplenishmentPage = () => {
             if (selectCripto) {
                 setConvertPrice(userPrice / selectCripto.price);
             }
-            setSelectedCripto(market[0])
         }
     }, [selectedCripto, market, userPrice]);
 
@@ -92,7 +91,7 @@ const ReplenishmentPage = () => {
                             <CriptoForm inputHandler={setConvertPrice}
                                 inputValue={convertPrice} readOnly />
     
-                            <CurrencyDropdown criptoList={market} selectedCripto={selectedCripto} setSelectedCripto={setSelectedCripto} />
+                            <CurrencyDropdown criptoList={market} selectedCripto={(selectedCripto || market[0])} setSelectedCripto={setSelectedCripto} />
                         </div>
                         <p className="reward-text">Reward: {userPrice * 0.0303954} TRD</p>
                     </div>

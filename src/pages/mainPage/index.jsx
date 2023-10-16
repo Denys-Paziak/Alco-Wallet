@@ -66,9 +66,7 @@ export default function MainPage() {
             </div>
         )
     } else {
-        console.log(market);
-        console.log(cryptoBalance);
-        console.log(chart7DaysAllCrypto);
+        
         const filteredMarket = market.filter((crypto) => {
             return crypto.name.toLowerCase().includes(searchText.toLowerCase());
         });
@@ -137,11 +135,11 @@ export default function MainPage() {
                                     <span className='total'>{cryptoBalance?.[crypto.symbol]?.total || 0} </span>
                                     <span className='symbol'>{crypto.symbol.toUpperCase()}</span>
                                 </div>
-                                <p className='table-item__value'>{cryptoPortfolio ? `${cryptoPortfolio.percentage.toFixed(2)}%` : "N/A"}</p>
+                                <p className='table-item__value'>{(cryptoBalance?.[crypto.symbol]?.total || 0) * crypto.price}</p>
                                 <p className='table-item__price'>${crypto.price}</p>
                                 <p className={`table-item__24h ${statusStyle}`}>{crypto.change.toFixed(2)}</p>
                                 {/* Відобразіть дані про портфоліо для кожної криптовалюти */}
-                                <p className='table-item__portfolio'>{cryptoPortfolio ? `${cryptoPortfolio.percentage.toFixed(2)}%` : "N/A"}</p>
+                                <p className='table-item__portfolio'>{cryptoPortfolio ? `${cryptoPortfolio.percentage.toFixed(2)}%` : "0.00%"}</p>
                                 <p className='table-item__mCap'>{formatMCap(crypto.MCap)}</p>
                                 <div className='table-item__chart'>
                                     <CryptoChart chartData={{
