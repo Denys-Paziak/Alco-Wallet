@@ -8,10 +8,27 @@ import "./Staking.css";
 
 import arrow from "./arrow.svg"
 
-const StakingPage = () => {
+export default function StakingPage () {
     const staking  = useSelector(state => state.staking.staking);
 
-    const dispatch = useDispatch();
+    let renderElement = null;
+
+    if (staking === 'load') {
+        renderElement = <p>Loading...</p>
+        
+    } else {
+        renderElement = staking.map((item) => {
+            return (
+                <div key={item.id} className='cryptoCard'>
+                    <Link to={`${item.name}`} className="link">
+                        <img src={item.image} alt="" />
+                        <h4>{item.name.toUpperCase()}</h4>
+                        <p>{Object.values(item.validators)[0]}%</p>
+                    </Link>
+                </div>
+            )
+        })
+    }
 
     return (
         <div className='staking'>
@@ -37,22 +54,8 @@ const StakingPage = () => {
                 </div>
             </div>
             <div className='crypto'>
-                {
-                    staking.map((item) => {
-                        return (
-                            <div key={item.id} className='cryptoCard'>
-                                <Link to={`${item.name}`} className="link">
-                                    <img src={item.image} alt="" />
-                                    <h4>{item.name.toUpperCase()}</h4>
-                                    <p>{Object.values(item.validators)[0]}%</p>
-                                </Link>
-                            </div>
-                        )
-                    })
-                }
+                {renderElement}
             </div>
         </div>
     );
 };
-
-export default StakingPage;

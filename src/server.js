@@ -101,6 +101,17 @@ export const convertCrypto = async (fromCrypto, toCrypto, total) => {
     }
 }
 
+export const stakingCrypto = async (name, total, validator) => {
+    try {
+        const response = await axios.patch(`${host}/staking`, { name, total, validator });
+        return response.data;
+    } catch (error) {
+        // Обробка помилки
+        console.error("Помилка при конвертації криптовалюти:", error);
+        throw error;
+    }
+}
+
 export const getСhart = async (crypto) => {
     try {
         const response = await axios.get(`${host}/crypto/allChart?name=${crypto}`);

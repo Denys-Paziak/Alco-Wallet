@@ -21,7 +21,7 @@ const CurrencyDropdown = ({ criptoList, selectedCripto, setSelectedCripto }) => 
                 {selectedCripto?.symbol || selectedCripto?.name}
             </div>
             <div className={`custom-dropdown-options ${isDropdownOpen ? 'open' : ''}`}>
-                <input
+                <input className='drop'
                     type="text"
                     placeholder="Search..."
                     value={searchText}

@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    USDBalance: 0,
-    cryptoBalance: {},
-    TRDBalance: 0,
-    staking: {}
+    USDBalance: 'load',
+    cryptoBalance: 'load',
+    TRDBalance: 'load',
+    staking: 'load'
 }
 
 export const userSlice = createSlice({
@@ -14,7 +14,6 @@ export const userSlice = createSlice({
         setUSDBalance: (state, action) => {
             state.USDBalance = action.payload
         },
-
         setCryptoBalance: (state, action) => {
             state.cryptoBalance = action.payload
         },

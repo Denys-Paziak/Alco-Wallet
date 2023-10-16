@@ -2,6 +2,7 @@
 .custom-dropdown-container {
     position: relative;
     text-transform: uppercase;
+    width:fit-content;
 }
 
 /* Тригер для відкриття списку */
@@ -10,7 +11,7 @@
     justify-content: center;
     align-items: center;
     color: #fff;
-    width: 50px;
+    width:fit-content;
     height: 45px;
     border-bottom: 2px solid var(--main);
     padding: 0 10px;
@@ -28,14 +29,14 @@
     position: absolute;
     display: none;
     top: 100%;
-    left: 0;
     background-color: var(--secondary);
     max-height: 200px;
-    width: 100%;
+    width:fit-content;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow-y: scroll;
     z-index: 1;
+    text-wrap: nowrap;
 }
 
 .custom-dropdown-options::-webkit-scrollbar {
@@ -66,4 +67,8 @@
 /* Відображаємо список при відкритті */
 .custom-dropdown-options.open {
     display: block;
+}
+
+.drop {
+    width: 100%;
 }

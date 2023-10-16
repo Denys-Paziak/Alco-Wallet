@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    staking: []
+    staking: 'load'
 }
 
 export const stakingSlice = createSlice({

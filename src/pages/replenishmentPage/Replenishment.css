@@ -16,6 +16,10 @@
     gap: 20px;
 }
 
+.checkbox-container .checkbox {
+    width: 15px;
+}
+
 .crypto-form .right,
 .crypto-form .left {
     display: flex;

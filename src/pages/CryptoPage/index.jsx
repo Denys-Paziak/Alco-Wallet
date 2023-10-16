@@ -13,7 +13,8 @@ const CryptoPage = () => {
 
     const market  = useSelector(state => state.market.market).find(item => item.name === name);
     const user  = useSelector(state => state.user.cryptoBalance)[market.symbol];
-console.log(user);
+
+    
     return (
         <div className='cryptoPage'>
         <div div className="nameCrypto" >

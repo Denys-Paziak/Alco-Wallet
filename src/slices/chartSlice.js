@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    chart7DaysAllCrypto: {},
-    chartAllOneCrypto: []
+    chart7DaysAllCrypto: 'load',
+    chartAllOneCrypto: 'load'
 }
 
 export const chartSlice = createSlice({
