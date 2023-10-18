@@ -29,14 +29,14 @@ a {
 
 button {
   display: inline-flex;
-  padding: 23px 80px;
+  padding: 20px 70px;
   align-items: flex-start;
   gap: 34px;
   color: var(--text);
   font-size: 20px;
   border-radius: 16px;
   background: var(--BLUE_main);
-  transition: 0.6s;
+  transition: 0.4s;
   cursor: pointer;
 }
 

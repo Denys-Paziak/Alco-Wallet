@@ -9,12 +9,14 @@
     display: flex;
     align-items:flex-end;
     margin-top: 150px;
+    margin-bottom: 70px;
 }
 
 .crypto-form .row {
     display: flex;
     align-items: flex-end;
     gap: 10px;
+    position: relative;
 }
 
 .crypto-form .right,
@@ -22,7 +24,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 470px;;
+    width: 470px;
+    position: relative;
+}
+
+.crypto-form .right .reward-text {
+    position: absolute;
+    bottom: -30px;
 }
 
 .crypto-form .left .col {
@@ -42,6 +50,7 @@
 }
 
 .crypto-form__input {
+    width: 400px;
     background: none;
     border: none;
     border-bottom: 2px solid var(--text);
@@ -64,9 +73,26 @@
 }
 
 .crypto-form__text {
-    margin-top: 50px;
-    width: 370px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: fit-content;
     line-height: 42px;
+    margin-bottom: 50px;
+    color: #FE3333;
+    font-size: 18px;
+    line-height: 27px;
+    letter-spacing: 0px;
+}
+
+.crypto-form__text .buy {
+    width: fit-content;
+    border: 2px solid white;
+    border-radius: 15px;
+    color: white;
+    padding: 3px 15px;
+    font-size: 13px;
+    margin: 0 auto;
 }
 
 .reward-text {
@@ -85,4 +111,40 @@
     top: 2px;
     border-radius: 4px;
     background: #060026;
+    margin-right: 10px;
+}
+
+.disablet {
+    background: #7c798e;
+}
+
+.disablet:hover {
+    background: #7c798e;
+}
+
+.sendAll {
+    display: flex;
+    align-items:center;
+    position: absolute;
+    left: 330px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0px;
+    width: 100px;
+    height: 100%;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.sendAll:hover {
+    color: var(--main);
+}
+
+.replenishmentPage .infoText{
+    margin-bottom: 30px;
+}
+
+.replenishmentPage .infoText p{
+    margin-bottom: 10px;
 }
