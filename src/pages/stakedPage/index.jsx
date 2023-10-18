@@ -51,7 +51,7 @@ export default function StakedPage() {
 
     if (market === 'load' && staking === 'load') {
         return (
-            <div className="replenishmentPage">
+            <div className="staked">
                 <Link to={"/staking/" + pathname[2]} className='back'>
                     <img src={arrowBack} alt="" />
                 </Link>
@@ -89,7 +89,7 @@ export default function StakedPage() {
         };
 
         return (
-            <div className="replenishmentPage">
+            <div className="staked">
                 <Link to={"/staking/" + pathname[2]} className='back'>
                     <img src={arrowBack} alt="" />
                 </Link>

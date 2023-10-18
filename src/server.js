@@ -133,3 +133,14 @@ export const getSevenDaysСhart = async () => {
         throw error;
     }
 }
+
+export const getHistory = async () => {
+    try {
+        const response = await axios.get(`${host}/user/history`);
+        return response.data;
+    } catch (error) {
+        // Обробка помилки
+        console.error("Помилка при полученні даних історії:", error);
+        throw error;
+    }
+}

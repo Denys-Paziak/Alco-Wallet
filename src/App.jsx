@@ -8,7 +8,8 @@ import Menu from './Components/Menu/Menu';
 import { setUSDBalance, setCryptoBalance, setTRDBalance, setUserStaking } from "./slices/userSlice";
 import { setMarket } from "./slices/marketSlice";
 import { setStaking } from "./slices/stakingSlice";
-import { setChart7DaysAllCrypto } from "./slices/chartSlice"
+import { setChart7DaysAllCrypto } from "./slices/chartSlice";
+import { setHistory } from "./slices/historySlice";
 import * as server from './server';
 
 import "./style.css";
@@ -38,7 +39,10 @@ function App() {
     server.getSevenDaysСhart().then((data) => {
       dispatch(setChart7DaysAllCrypto(data.body));
     });
-  }, [])
+    server.getHistory().then((data) => {
+      dispatch(setHistory(data.userHistory));
+    });
+  }, []);
 
   return (
     <Router>
