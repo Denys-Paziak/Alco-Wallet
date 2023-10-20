@@ -1,13 +1,13 @@
 import React from 'react';
 import { BiSolidWalletAlt } from "react-icons/bi";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineHistory } from "react-icons/ai";
 import { LiaExchangeAltSolid } from "react-icons/lia";
 import { BsFillLayersFill } from "react-icons/bs";
+import { FiSettings } from "react-icons/fi";
 import Balance from "../Balance/Balance"
 import { NavLink } from "react-router-dom";
 
 import "./Menu.css"
-import CurrencyDropdown from '../CurrencyDropdown/CurrencyDropdown';
 
 const Menu = () => {
     return (
@@ -16,7 +16,7 @@ const Menu = () => {
             <Balance />
 
             <div className='nav'>
-                <NavLink exact to="/" activeClassName="active">
+                <NavLink to="/" activeClassName="active">
                     <div className='menu-item'>
                         <BiSolidWalletAlt />
                         <p>Wallet</p>
@@ -39,6 +39,18 @@ const Menu = () => {
                     <div className='menu-item flex items-center gap-5'>
                         <BsFillLayersFill />
                         <p>Staking</p>
+                    </div>
+                </NavLink>
+                <NavLink to="/history" activeClassName="active">
+                    <div className='menu-item flex items-center gap-5'>
+                        <AiOutlineHistory />
+                        <p>History</p>
+                    </div>
+                </NavLink>
+                <NavLink to="/settings" activeClassName="active">
+                    <div className='menu-item flex items-center gap-5'>
+                        <FiSettings />
+                        <p>Settings</p>
                     </div>
                 </NavLink>
             </div>

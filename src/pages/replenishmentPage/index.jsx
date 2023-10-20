@@ -9,9 +9,68 @@ import { setCryptoBalance, setUSDBalance } from "../../slices/userSlice";
 import CriptoForm from "../../Components/CryptoForm/CriptoForm";
 
 import arrow from "./arrow.svg";
-import checkImg from "./check.svg"
+import checkImg from "./check.svg";
 
-export default function ConvertationPage() {
+
+const tabsData = ["Instant Exchange", "Order History"]
+
+export default function ReplenishmentPage() {
+    const [activeTab, setTab] = useState(0);
+
+    let renderedComponent;
+    if (activeTab == 0) {
+        renderedComponent = <InstantExchange />
+    } else {
+        renderedComponent = <OrderHistory />;
+    }
+
+    return (
+        <>
+            <div className="page-tabs">
+                {tabsData.map((el, index) => {
+                    if (index === activeTab) {
+                        return <div key={el} className='active'
+                            onClick={() => { setTab(index); }}>{el}</div>
+                    } else {
+                        return <div key={el} onClick={() => { setTab(index); }}>{el}</div>
+                    }
+
+                })}
+            </div>
+            {renderedComponent}
+        </>
+    )
+
+};
+
+const OrderHistory = () => {
+    const history = useSelector(state => state.history.historyBuy);
+    console.log(history);
+    return (
+        <>
+            {history.map(el => {
+                return (
+                    <div key={el.id} className="history-item">
+                        <div className="history-item__date">
+                            {el.date}
+                        </div>
+                        <div className="history-item__crypto-info">
+                            <div className="history-item__name">
+                                {el.body.name}
+                            </div>
+                            <div className="history-item__total">
+                                {el.body.total}
+                            </div>
+                        </div>
+                    </div>
+                )
+            })}
+
+        </>
+    );
+}
+
+const InstantExchange = () => {
     const user = useSelector(state => state.user.USDBalance);
     const market = useSelector(state => state.market.market);
 
@@ -26,6 +85,8 @@ export default function ConvertationPage() {
 
     const [notification, setNotification] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+
+
 
     const dispatch = useDispatch();
 
@@ -42,6 +103,7 @@ export default function ConvertationPage() {
             setMarketSelectCripto(market[0]);
         }
     }, [market, user]);
+
 
     if (!marketSelectCripto || user === 'load') {
         return (
@@ -103,14 +165,13 @@ export default function ConvertationPage() {
             }
         }
 
-        
-        console.log(!check || isLoading || (limitedInput !== "value") || !parseFloat(userInputPrice));
-
         return (
             <div className="replenishmentPage">
+
+
                 <div className='crypto-form'>
                     {
-                        Object.values(userSelectCripto).length !== 0 
+                        Object.values(userSelectCripto).length !== 0
                             ?
                             <div className="left">
                                 <img className='crypto-form__img' src={userSelectCripto.image} alt="" />
@@ -172,4 +233,4 @@ export default function ConvertationPage() {
             </div>
         );
     }
-};
+}

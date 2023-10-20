@@ -6,11 +6,18 @@
 }
 
 .table-item {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 50px;
     align-items: center;
     background: var(--tableItem);
     padding: 11px 15px;
 }
+
+.table-item:nth-child(odd) {
+    background: var(--bg);
+}
+
 
 .table-item__icon {
     display: flex;
@@ -44,9 +51,6 @@
 }
 
 
-.table-item:nth-child(odd) {
-    background: var(--bg);
-}
 
 .table-item__balance {
     width: 250px;
@@ -83,18 +87,6 @@
 
 .table-item__24h.green {
     color: #00FF47;
-}
-
-.table-item__portfolio {
-    width: 120px;
-    text-align: right;
-    color: #ffffff7a;
-}
-
-.table-item__mCap {
-    width: 120px;
-    text-align: right;
-    color: #ffffff7a;
 }
 
 .table-item__chart {

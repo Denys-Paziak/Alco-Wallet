@@ -83,3 +83,22 @@ input {
   background-color: #f44336;
   color: white;
 }
+
+.page-tabs {
+  display: flex;
+  width: 100%;
+}
+
+.page-tabs div {
+  width: 50%;
+  padding: 30px;
+  text-align: center;
+}
+
+.page-tabs div {
+  background: #342F55;
+}
+
+.page-tabs div.active {
+  background: var(--bg);
+}

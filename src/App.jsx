@@ -2,7 +2,7 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { useEffect } from "react";
 
-import { MainPage, ReplenishmentPage, ConvertationPage, BuyUSD, StakingPage, StakingInfo, CryptoPage, StakedPage } from "./pages";
+import { MainPage, ReplenishmentPage, ConvertationPage, BuyUSD, StakingPage, StakingInfo, CryptoPage, StakedPage, HistoryPage, SettingsPage } from "./pages";
 import Menu from './Components/Menu/Menu';
 
 import { setUSDBalance, setCryptoBalance, setTRDBalance, setUserStaking } from "./slices/userSlice";
@@ -48,14 +48,16 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/:name" element={<CryptoPage />} />
-          <Route path="replenishment" element={<ReplenishmentPage />} />
-          <Route path="convertation" element={<ConvertationPage />} />
-          <Route path="buyUSD" element={<BuyUSD />} />
-          <Route path="staking" element={<StakingPage />} />
-          <Route path="staking/:name" element={<StakingInfo />} />
-          <Route path="staking/:name/stake" element={<StakedPage />} />
+          <Route exact path="/" element={<MainPage />} />
+          <Route exact path="/:name" element={<CryptoPage />} />
+          <Route exact path="replenishment" element={<ReplenishmentPage />} />
+          <Route exact path="convertation" element={<ConvertationPage />} />
+          <Route exact path="buyUSD" element={<BuyUSD />} />
+          <Route exact path="staking" element={<StakingPage />} />
+          <Route exact path="staking/:name" element={<StakingInfo />} />
+          <Route exact path="staking/:name/stake" element={<StakedPage />} />
+          <Route exact path="history/" element={<HistoryPage />} />
+          <Route exact path="settings/" element={<SettingsPage />} />
         </Routes>
         <Menu />
       </div>

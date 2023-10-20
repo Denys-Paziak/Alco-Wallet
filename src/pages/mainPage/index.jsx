@@ -57,35 +57,33 @@ export default function MainPage() {
                     <p className='table-item__value'>Value</p>
                     <p className='table-item__price'>Price</p>
                     <p className='table-item__24h'>24h</p>
-                    <p className='table-item__portfolio'>Portfolio</p>
-                    <p className='table-item__mCap'>M. cap</p>
                     <p className='table-item__chart'>7 days chart</p>
                 </div>
-    
+
                 <div>Loading...</div>
             </div>
         )
     } else {
-        
+
         const filteredMarket = market.filter((crypto) => {
             return crypto.name.toLowerCase().includes(searchText.toLowerCase());
         });
-    
+
         const totalPortfolioValue = filteredMarket.reduce((total, crypto) => {
             return total + (cryptoBalance?.[crypto.symbol]?.total || 0) * crypto.price;
         }, 0);
-    
+
         const portfolio = filteredMarket.map((crypto) => {
             const cryptoValue = (cryptoBalance?.[crypto.symbol]?.total || 0) * crypto.price;
             const percentageOfPortfolio = (cryptoValue / totalPortfolioValue) * 100;
-    
+
             return {
                 name: crypto.name,
                 symbol: crypto.symbol,
                 percentage: percentageOfPortfolio,
             };
         });
-    
+
         return (
             <div>
                 <div className="table-item table-title">
@@ -101,28 +99,26 @@ export default function MainPage() {
                     <p className='table-item__value'>Value</p>
                     <p className='table-item__price'>Price</p>
                     <p className='table-item__24h'>24h</p>
-                    <p className='table-item__portfolio'>Portfolio</p>
-                    <p className='table-item__mCap'>M. cap</p>
                     <p className='table-item__chart'>7 days chart</p>
                 </div>
-    
+
                 {filteredMarket.length === 0 ? (
                     <p className="table-item text-gray-400 text-lg font-semibold">No results found.</p>
                 ) : (
                     filteredMarket.map((crypto, index) => {
                         const statusStyle = parseFloat(crypto.change) < 0 ? 'red' : 'green';
-    
+
                         // Отримайте дані про портфоліо для кожної криптовалюти
                         const cryptoPortfolio = portfolio.find((item) => item.symbol === crypto.symbol);
-    
+
                         let name;
-    
+
                         if (crypto.name.length > 9) {
                             name = crypto.name.slice(0, 9) + "...";
                         } else {
                             name = crypto.name;
                         }
-    
+
                         return (
                             <NavLink key={crypto.id} to={`${crypto.name}`} className="table-item">
                                 <div className='table-item__search'>
@@ -137,8 +133,6 @@ export default function MainPage() {
                                 <p className='table-item__price'>${crypto.price}</p>
                                 <p className={`table-item__24h ${statusStyle}`}>{crypto.change.toFixed(2)}</p>
                                 {/* Відобразіть дані про портфоліо для кожної криптовалюти */}
-                                <p className='table-item__portfolio'>{cryptoPortfolio ? `${cryptoPortfolio.percentage.toFixed(2)}%` : "0.00%"}</p>
-                                <p className='table-item__mCap'>{formatMCap(crypto.MCap)}</p>
                                 <div className='table-item__chart'>
                                     <CryptoChart chartData={{
                                         labels: ['', '', '', '', '', '', ''],
@@ -161,7 +155,7 @@ export default function MainPage() {
     }
 }
 
-function formatMCap (value) {
+function formatMCap(value) {
     if (value >= 1e9) {
         return (value / 1e9).toFixed(2) + "B";
     } else if (value >= 1e6) {

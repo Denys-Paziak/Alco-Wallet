@@ -11,9 +11,69 @@ import CriptoForm from "../../Components/CryptoForm/CriptoForm";
 import arrow from "./arrow.svg";
 import checkImg from "./check.svg"
 
-import "./convertation.css"
+import "./convertation.css";
+
+
+
+const tabsData = ["Instant Exchange", "Order History"]
 
 export default function ConvertationPage() {
+    const [activeTab, setTab] = useState(0);
+
+    let renderedComponent;
+    if (activeTab == 0) {
+        renderedComponent = <InstantExchange />
+    } else {
+        renderedComponent = <OrderHistory />;
+    }
+
+    return (
+        <>
+            <div className="page-tabs">
+                {tabsData.map((el, index) => {
+                    if (index === activeTab) {
+                        return <div key={el} className='active'
+                            onClick={() => { setTab(index); }}>{el}</div>
+                    } else {
+                        return <div key={el} onClick={() => { setTab(index); }}>{el}</div>
+                    }
+
+                })}
+            </div>
+            {renderedComponent}
+        </>
+    )
+
+};
+
+const OrderHistory = () => {
+    const history = useSelector(state => state.history.historyConvert);
+    console.log(history);
+    return (
+        <>
+            {history.map(el => {
+                return (
+                    <div key={el.id} className="history-item">
+                        <div className="history-item__date">
+                            {el.date}
+                        </div>
+                        <div className="history-item__crypto-info">
+                            <div className="history-item__name">
+                                {el.body.fromCrypto}
+                            </div>
+                            <div className="history-item__total">
+                                {el.body.total}
+                            </div>
+                        </div>
+                    </div>
+                )
+            })}
+
+        </>
+    );
+}
+
+const InstantExchange = () => {
     const user = useSelector(state => state.user.cryptoBalance);
     const market = useSelector(state => state.market.market);
 
@@ -51,7 +111,7 @@ export default function ConvertationPage() {
             const filteredCryptoList = market.filter((item) => !user?.[item.symbol]);
 
             setMarketSelectCripto(filteredCryptoList[0]);
-            
+
         }
     }, [market, user]);
 
@@ -158,7 +218,7 @@ export default function ConvertationPage() {
                         </div>
                     </div>
                 </div>
-                    {(Object.values(userSelectCripto).length !== 0 && user !== "load") ? <LimitedMessage crypto={userSelectCripto} limitedResult={limitedInput}/> : null}
+                {(Object.values(userSelectCripto).length !== 0 && user !== "load") ? <LimitedMessage crypto={userSelectCripto} limitedResult={limitedInput} /> : null}
 
                 <div className='checkbox-container' onClick={onClickCheckbox}>
                     <div className="checkbox" >{check ? <img src={checkImg} alt="" /> : null}</div>
@@ -180,7 +240,7 @@ export default function ConvertationPage() {
     }
 };
 
-function LimitedMessage({crypto, limitedResult}) {
+function LimitedMessage({ crypto, limitedResult }) {
     switch (limitedResult) {
         case "max":
             return (
@@ -205,5 +265,5 @@ function LimitedMessage({crypto, limitedResult}) {
             )
     }
 
-    
+
 }
