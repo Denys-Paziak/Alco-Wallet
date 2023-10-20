@@ -38,19 +38,19 @@ export default function StakingPage () {
                 <div className='stage'>
                     <p className='titleStage'>Stake coins to validator</p>
                     <p className='available'>Available $1000</p>
-                    <p className='staked'>Staked $0</p>
+                    <p className='stakedStage'>Staked $0</p>
                 </div>
                 <img className='arrow' src={arrow}/>
                 <div className='stage'>
                     <p className='titleStage'>Validator creates blocks</p>
                     <p className='available'>Available $0</p>
-                    <p className='staked'>Staked $1000</p>
+                    <p className='stakedStage'>Staked $1000</p>
                 </div>
                 <img className='arrow' src={arrow}/>
                 <div className='stage'>
                     <p className='titleStage'>You receieve rewards</p>
                     <p className='available'>Staked $1000</p>
-                    <p className='staked'>Rewards $230</p>
+                    <p className='stakedStage'>Rewards $230</p>
                 </div>
             </div>
             <div className='crypto'>

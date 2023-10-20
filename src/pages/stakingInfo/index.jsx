@@ -12,7 +12,7 @@ export default function StakingInfo() {
     const stakingUser  = useSelector(state => state.user.staking);
     const crypto  = useSelector(state => state.user.cryptoBalance);
 
-    if (staking === 'load' && stakingUser === 'load' && crypto === 'load') {
+    if (staking === 'load' || stakingUser === 'load' || crypto === 'load') {
         return (
             <div className='stakingInfo'>
                 <Link to="/staking" className='back'>
@@ -65,7 +65,7 @@ export default function StakingInfo() {
                         </div>
                         <div className="info">
                             <p className='indicator'>Unbounding</p>
-                            <p className='total'>{(stakingUser?.[name]?.total + stakingUser?.[name]?.rewards) || 0}</p>
+                            <p className='total'>{(parseFloat(stakingUser?.[name]?.total) + parseFloat(stakingUser?.[name]?.rewards)) || 0}</p>
                             <p className='nameCrypto'>{nameUpperCase}</p>
                         </div>
                     </div>

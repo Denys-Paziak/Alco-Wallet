@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { convertCrypto, getListUserCrypto } from '../../server';
 import CurrencyDropdown from '../../Components/CurrencyDropdown/CurrencyDropdown';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { setCryptoBalance } from "../../slices/userSlice";
 
 import CriptoForm from "../../Components/CryptoForm/CriptoForm";
+import LimitedMessage from '../../Components/LimitedMessage/LimitedMessage';
 
 import arrow from "./arrow.svg";
 import checkImg from "./check.svg"
@@ -90,7 +91,6 @@ export default function ConvertationPage() {
             }, 3000);
         };
 
-
         function onClickCheckbox() {
             setCheck((state) => !state);
         }
@@ -101,19 +101,19 @@ export default function ConvertationPage() {
         }
 
         function limitedValidator(value) {
-            const max = userSelectCripto.total;
-            const min = (10 / userSelectCripto.courseOnCrypto);
+            const max = parseFloat(userSelectCripto.total);
+            const min = (10 / userSelectCripto.courseOnCrypto).toFixed(4);
 
-            if (value > max) {
+            if (parseFloat(value) > max) {
                 setLimitedInput("max");
-            } else if (value < min) {
+            } else if (parseFloat(value) < min) {
                 setLimitedInput("min");
             } else {
                 setLimitedInput("value");
             }
         }
 
-        const filteredCryptoList = market.filter((item) => !user?.[item.symbol]);
+        const filteredCryptoList = market.filter((item) => item.symbol !== userSelectCripto.name);
 
         return (
             <div className="replenishmentPage">
@@ -131,9 +131,9 @@ export default function ConvertationPage() {
                                     />
                                     <p className='sendAll' onClick={onSendAll}>Send all</p>
                                     <CurrencyDropdown
-                                        criptoList={user}
-                                        selectedCripto={userSelectCripto}
-                                        setSelectedCripto={setUserSelectCripto} />
+                                        list={user}
+                                        selected={userSelectCripto}
+                                        setSelected={setUserSelectCripto} />
                                 </div>
                             </div>
                             :
@@ -151,15 +151,25 @@ export default function ConvertationPage() {
                     <div className="right">
                         <img className='crypto-form__img' src={marketSelectCripto.image} alt="" />
                         <div className="row">
-                            <CriptoForm inputHandler={setMarketInputPrice}
-                                inputValue={marketInputPrice} readOnly />
+                            <CriptoForm 
+                                inputHandler={setMarketInputPrice}
+                                inputValue={marketInputPrice} 
+                                readOnly />
 
-                            <CurrencyDropdown criptoList={filteredCryptoList} selectedCripto={marketSelectCripto} setSelectedCripto={setMarketSelectCripto} />
+                            <CurrencyDropdown 
+                                list={filteredCryptoList} 
+                                selected={marketSelectCripto} 
+                                setSelected={setMarketSelectCripto} />
                         </div>
                     </div>
                 </div>
-                    {(Object.values(userSelectCripto).length !== 0 && user !== "load") ? <LimitedMessage crypto={userSelectCripto} limitedResult={limitedInput}/> : null}
-
+                    {
+                    (Object.values(userSelectCripto).length !== 0 && user !== "load") 
+                    ? 
+                    <LimitedMessage crypto={userSelectCripto} limitedResult={limitedInput}/> 
+                    : 
+                    null
+                    }
                 <div className='checkbox-container' onClick={onClickCheckbox}>
                     <div className="checkbox" >{check ? <img src={checkImg} alt="" /> : null}</div>
                     <p>I agree to the Terms of Service</p>
@@ -179,31 +189,3 @@ export default function ConvertationPage() {
         );
     }
 };
-
-function LimitedMessage({crypto, limitedResult}) {
-    switch (limitedResult) {
-        case "max":
-            return (
-                <p className='crypto-form__text'>
-                    <span style={{ marginRight: 10 }}>To make this exchange, deposit more {crypto.name.toUpperCase()} to your wallet</span>
-                    <Link to='/replenishment' className='buy'>Buy {crypto.name.toUpperCase()}</Link>
-                </p>
-            )
-        case "min":
-            return (
-                <p className='crypto-form__text'>
-                    <span style={{ marginRight: 5 }}>The minimum amount for exchange is</span>
-                    <span style={{ marginRight: 10 }}>{(10 / crypto.courseOnCrypto)} {crypto.name.toUpperCase()}</span>
-                    <Link to='/replenishment' className='buy'>Buy {crypto.name.toUpperCase()}</Link>
-                </p>
-            )
-        default:
-            return (
-                <p className='crypto-form__text'>
-                    <span style={{ color: "#00cb07" }}>All ready for conversion</span>
-                </p>
-            )
-    }
-
-    
-}
