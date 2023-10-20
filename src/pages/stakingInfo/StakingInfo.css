@@ -4,6 +4,7 @@
     position: relative;
     padding: 90px 0 0;
     margin: 0 auto;
+    padding-left: 60px;
 }
 
 .stakingInfo .back {
@@ -16,7 +17,7 @@
     min-width: 424px;
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     margin-right: 50px;
 }
 
@@ -91,7 +92,7 @@
 
 .stakingInfo .buttonsStake .stakeCrypto {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     width: 200px;
     height: 60px;
@@ -100,12 +101,17 @@
     padding: 0;
     font-weight: 700;
     letter-spacing: 0.015em;
+    border: none;
     background: #EB00FF;
+}
+
+.stakingInfo .buttonsStake .stakeCrypto:hover {
+    box-shadow: 0px 0px 10px #EB00FF;
 }
 
 .stakingInfo .buttonsStake .unstake {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     width: 200px;
     height: 60px;
@@ -118,21 +124,27 @@
     background: inherit;
 }
 
+.stakingInfo .buttonsStake .unstake:hover {
+    background: #EB00FF;
+    box-shadow: 0px 0px 10px #EB00FF;
+    border-color: #EB00FF;
+}
+
 .stakingInfo .sideButtons {
     display: flex;
     flex-direction: column;
     padding-top: 230px;
 }
 
-.stakingInfo .sideButtons .sideStake{
+.stakingInfo .sideButtons .sideStake {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     width: 152px;
     height: 43px;
     border-radius: 16px;
     border: 2px solid #FFFFFF66;
-    background:inherit;
+    background: inherit;
     padding: 0;
     margin-bottom: 25px;
     font-size: 14px;
@@ -143,13 +155,13 @@
 
 .stakingInfo .sideButtons .sideRedelegate {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     width: 152px;
     height: 43px;
     border-radius: 16px;
     border: 2px solid #FFFFFF66;
-    background:inherit;
+    background: inherit;
     padding: 0;
     font-size: 14px;
     font-weight: 500;
@@ -160,13 +172,13 @@
 
 .stakingInfo .sideButtons .sideClaim {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     width: 152px;
     height: 43px;
     border-radius: 16px;
     border: 2px solid #FFFFFF66;
-    background:inherit;
+    background: inherit;
     padding: 0;
     font-size: 14px;
     font-weight: 500;

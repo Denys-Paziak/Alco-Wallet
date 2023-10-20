@@ -99,10 +99,10 @@ const InstantExchange = () => {
     }, [userSelectCripto, marketSelectCripto, userInputPrice]);
 
     useEffect(() => {
-        if (market !== 'load' && Object.values(market).length !== 0) {
+        if (market !== 'load') {
             setMarketSelectCripto(market[0]);
         }
-    }, [market, user]);
+    }, [market]);
 
 
     if (!marketSelectCripto || user === 'load') {
@@ -153,12 +153,12 @@ const InstantExchange = () => {
         }
 
         function limitedValidator(value) {
-            const max = userSelectCripto;
+            const max = parseFloat(userSelectCripto);
             const min = 1;
 
-            if (value > max) {
+            if (parseFloat(value) > max) {
                 setLimitedInput("max");
-            } else if (value < min) {
+            } else if (parseFloat(value) < min) {
                 setLimitedInput("min");
             } else {
                 setLimitedInput("value");
@@ -183,9 +183,9 @@ const InstantExchange = () => {
                                     />
                                     <p className='sendAll' onClick={onSendAll}>Send all</p>
                                     <CurrencyDropdown
-                                        criptoList={user}
-                                        selectedCripto={userSelectCripto}
-                                        setSelectedCripto={setUserSelectCripto} />
+                                        list={user}
+                                        selected={userSelectCripto}
+                                        setSelected={setUserSelectCripto} />
                                 </div>
                             </div>
                             :
@@ -203,10 +203,15 @@ const InstantExchange = () => {
                     <div className="right">
                         <img className='crypto-form__img' src={marketSelectCripto.image} alt="" />
                         <div className="row">
-                            <CriptoForm inputHandler={setMarketInputPrice}
-                                inputValue={marketInputPrice} readOnly />
+                            <CriptoForm 
+                                inputHandler={setMarketInputPrice}
+                                inputValue={marketInputPrice} 
+                                readOnly />
 
-                            <CurrencyDropdown criptoList={market} selectedCripto={marketSelectCripto} setSelectedCripto={setMarketSelectCripto} />
+                            <CurrencyDropdown 
+                                list={market} 
+                                selected={marketSelectCripto} 
+                                setSelected={setMarketSelectCripto} />
                         </div>
                         <p className="reward-text">Reward: {marketInputPrice * 0.0303954} TRD</p>
                     </div>

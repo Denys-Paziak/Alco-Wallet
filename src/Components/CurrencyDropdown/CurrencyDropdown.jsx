@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import "./CurrencyDropdown.css";
 
-const CurrencyDropdown = ({ criptoList, selectedCripto, setSelectedCripto }) => {
+const CurrencyDropdown = ({ list, selected, setSelected }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [searchText, setSearchText] = useState("");
 
@@ -11,14 +11,14 @@ const CurrencyDropdown = ({ criptoList, selectedCripto, setSelectedCripto }) => 
     };
 
     const selectCurrency = (cripto) => {
-        setSelectedCripto(cripto);
+        setSelected(cripto);
         setIsDropdownOpen(false);
     };
 
     return (
-        <div className="custom-dropdown-container">
+        <div className="custom-dropdown-container validator">
             <div className="custom-dropdown-trigger" onClick={toggleDropdown}>
-                {selectedCripto?.symbol || selectedCripto?.name}
+                {selected?.symbol || selected?.name}
             </div>
             <div className={`custom-dropdown-options ${isDropdownOpen ? 'open' : ''}`}>
                 <input className='drop'
@@ -27,7 +27,7 @@ const CurrencyDropdown = ({ criptoList, selectedCripto, setSelectedCripto }) => 
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
                 />
-                {Object.values(criptoList)
+                {Object.values(list)
                     .filter(option => {
                         const name = option?.name || "";
                         const symbol = option?.symbol || "";

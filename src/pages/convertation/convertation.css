@@ -9,7 +9,7 @@
     display: flex;
     align-items:flex-end;
     margin-top: 150px;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
 }
 
 .replenishmentPage .crypto-form .row {
@@ -78,7 +78,7 @@
     margin: 0;
     width: fit-content;
     line-height: 42px;
-    margin-bottom: 50px;
+    margin-bottom: 55px;
     color: #FE3333;
     font-size: 18px;
     line-height: 27px;
@@ -141,7 +141,7 @@
     color: var(--main);
 }
 
-.replenishmentPage .replenishmentPage .infoText{
+.replenishmentPage  .infoText{
     margin-bottom: 30px;
 }
 
