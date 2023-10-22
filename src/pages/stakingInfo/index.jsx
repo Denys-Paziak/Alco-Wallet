@@ -79,7 +79,7 @@ export default function StakingInfo() {
                     <div className='infoList'>
                         <div className="info">
                             <p className='indicator'>Total</p>
-                            <p className='total'>{(parseFloat(stakingUser?.[name]?.total) + parseFloat(crypto?.[name]?.total)) || 0}</p>
+                            <p className='total'>{(parseFloat(stakingUser?.[name]?.total || 0) + parseFloat(crypto?.[name]?.total)) || 0}</p>
                             <p className='nameCrypto'>{nameUpperCase}</p>
                         </div>
                         <div className="info">

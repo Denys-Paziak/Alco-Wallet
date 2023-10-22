@@ -4,6 +4,13 @@
     align-items: center;
     justify-content: center;
     padding-top: 50px;
+    position: relative;
+}
+
+.cryptoPage .back {
+    position: absolute;
+    top: 45px;
+    left: 38px;
 }
 
 .nameCrypto {
@@ -15,6 +22,15 @@
 .nameCrypto img {
     width: 56px;
     height: 56px;
+}
+
+.nameCrypto .name {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0em;
+    border-bottom: 2px solid #EB00FF;
+    padding: 10px 0;
 }
 
 .сtyptoButtons {
@@ -39,6 +55,13 @@
 .balanceInfo__crypto {
     display: flex;
     font-size: 30px;
+    margin: 0 auto;
+    width: fit-content;
+    font-size: 26px;
+}
+
+.balanceInfo__USD {
+    opacity: 0.5;
 }
 
 .balanceInfo .gray {

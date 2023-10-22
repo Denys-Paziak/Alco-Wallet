@@ -2,7 +2,14 @@
     padding: 30px 50px;
     display: flex;
     flex-direction: column;
+}
+
+.loadDepo {
     height: 80vh;
+}
+
+.deposit .menuDeposit {
+    margin-bottom: 40px;
 }
 
 .deposit .menuDeposit .title {
@@ -36,6 +43,7 @@
     border-bottom: 2px solid #ffffff;
 }
 
+
 .deposit .menuDeposit .periodsTabs .period span {
     font-weight: 275;
 }
@@ -46,7 +54,6 @@
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    position: relative;
 }
 
 .deposit .main >img {
@@ -61,7 +68,9 @@
 }
 
 .deposit .main .selectCripto {
+    position: relative;
     max-width: 315px;
+    margin-bottom: 80px;
 }
 
 .deposit .main .selectCripto .inputBox {
@@ -116,6 +125,11 @@
     border-bottom: 2px solid var(--main);
 }
 
+.deposit .main .selectCripto .currencyCrypto .wid {
+    cursor: text;
+    width: fit-content;
+}
+
 .deposit .main .selectCripto .balanceCrypto {
     display: flex;
     justify-content: space-between;
@@ -150,7 +164,8 @@
 
 .deposit .main .selectCripto .details {
     position: absolute;
-    right: 60px;
+    right: -420px;
+    bottom: 20px;
 }
 
 .deposit .main .selectCripto .details .btn {
@@ -185,4 +200,108 @@
 
 .deposit .main .selectCripto .show .btn{
     color: #ffffff;
+}
+
+.deposit .main .infoDeposit {
+    display: flex;
+    width: 100%;
+}
+
+.deposit .main .infoDeposit .tabsHistory {
+    width: 50%;
+}
+
+.deposit .main .infoDeposit .chartDeposit {
+    width: 50%;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit {
+    max-width: 500px;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .tabs {
+    display: flex;
+    justify-content: space-around;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0.015em;
+    border-bottom: 2px solid #FFFFFF4D;
+    color: #888599;
+    margin-bottom: 20px;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .tabs p {
+    padding: 0 20px 5px;
+    cursor: pointer;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .tabs .active {
+    border-bottom: 2px solid white;
+    color: white;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .historyDeposit, 
+.deposit .main .infoDeposit  .tabsHistory .limit .historyOrder {
+    max-height: 400px;
+    overflow: auto;
+    padding-right: 5px;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .historyDeposit::-webkit-scrollbar, 
+.deposit .main .infoDeposit  .tabsHistory .limit .historyOrder::-webkit-scrollbar {
+    width: 4px;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .historyDeposit::-webkit-scrollbar-thumb, 
+.deposit .main .infoDeposit  .tabsHistory .limit .historyOrder::-webkit-scrollbar-thumb {
+    background: #c9c9c956;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .historyDeposit::-webkit-scrollbar-track, 
+.deposit .main .infoDeposit  .tabsHistory .limit .historyOrder::-webkit-scrollbar-track {
+    background: inherit;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .historyOrder .record {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #332F54
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .historyOrder .record img {
+    margin-right: 15px;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .historyOrder .record .date {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.015em;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .historyOrder .record .total {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.015em;
+    flex-grow: 1;
+    text-align: right;
+    margin-right: 15px;
+}
+
+.deposit .main .infoDeposit  .tabsHistory .limit .historyOrder .record .crypto {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    letter-spacing: 0.015em;
+    color: #888599;
+}
+
+.noChart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 400px;
 }
