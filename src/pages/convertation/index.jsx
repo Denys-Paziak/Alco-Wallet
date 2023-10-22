@@ -66,7 +66,7 @@ const OrderHistory = () => {
                             <div className="history-item__arrow">
                                 <BsArrowRight />
                             </div>
-                            <div className="history-item__to">{el.body.resultConvert} {el.body.toCrypto.toUpperCase()}</div>
+                            <div className="history-item__to">{el.body.result} {el.body.toCrypto.toUpperCase()}</div>
                         </div>
                     </div>
                 )
