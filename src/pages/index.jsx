@@ -7,7 +7,18 @@ import StakingInfo from "./stakingInfo";
 import CryptoPage from "./CryptoPage";
 import StakedPage from "./stakedPage";
 import HistoryPage from "./history";
+import DepositPage from "./depositPage";
 
 
-
-export { MainPage, ReplenishmentPage, ConvertationPage, BuyUSD, StakingPage, StakingInfo, CryptoPage, StakedPage, HistoryPage }
+export {
+    MainPage,
+    ReplenishmentPage,
+    ConvertationPage,
+    BuyUSD,
+    StakingPage,
+    StakingInfo,
+    CryptoPage,
+    StakedPage,
+    HistoryPage,
+    DepositPage
+}

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import CryptoChart from '../../Components/CryptoChart/CryptoChart';
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import loadImg from "./load.svg";
 
 import "./MainPage.css";
 
@@ -61,28 +63,16 @@ export default function MainPage() {
                     <p className='table-item__chart'>7 days chart</p>
                 </div>
 
-                <div>Loading...</div>
+                <div className='loadBlock'>
+                    <img className='loadImg' src={loadImg} alt="" />
+                    <p className='loadText'>Loading...</p>
+                </div>
             </div>
         )
     } else {
 
         const filteredMarket = market.filter((crypto) => {
             return crypto.name.toLowerCase().includes(searchText.toLowerCase());
-        });
-
-        const totalPortfolioValue = filteredMarket.reduce((total, crypto) => {
-            return total + (cryptoBalance?.[crypto.symbol]?.total || 0) * crypto.price;
-        }, 0);
-
-        const portfolio = filteredMarket.map((crypto) => {
-            const cryptoValue = (cryptoBalance?.[crypto.symbol]?.total || 0) * crypto.price;
-            const percentageOfPortfolio = (cryptoValue / totalPortfolioValue) * 100;
-
-            return {
-                name: crypto.name,
-                symbol: crypto.symbol,
-                percentage: percentageOfPortfolio,
-            };
         });
 
         return (
@@ -106,11 +96,8 @@ export default function MainPage() {
                 {filteredMarket.length === 0 ? (
                     <p className="table-item text-gray-400 text-lg font-semibold">No results found.</p>
                 ) : (
-                    filteredMarket.map((crypto, index) => {
+                    filteredMarket.map((crypto) => {
                         const statusStyle = parseFloat(crypto.change) < 0 ? 'red' : 'green';
-
-                        // Отримайте дані про портфоліо для кожної криптовалюти
-                        const cryptoPortfolio = portfolio.find((item) => item.symbol === crypto.symbol);
 
                         let name;
 
@@ -121,7 +108,7 @@ export default function MainPage() {
                         }
 
                         return (
-                            <NavLink key={crypto.id} to={`${crypto.name}`} className="table-item">
+                            <Link key={crypto.id} to={`${crypto.name}`} className="table-item">
                                 <div className='table-item__search'>
                                     <img className='table-item__icon' src={crypto.image} alt='icon' />
                                     <p>{name}</p>
@@ -147,7 +134,7 @@ export default function MainPage() {
                                         ],
                                     }} />
                                 </div>
-                            </NavLink>
+                            </Link>
                         );
                     })
                 )}
@@ -155,14 +142,3 @@ export default function MainPage() {
         );
     }
 }
-
-function formatMCap(value) {
-    if (value >= 1e9) {
-        return (value / 1e9).toFixed(2) + "B";
-    } else if (value >= 1e6) {
-        return (value / 1e6).toFixed(2) + "M";
-    } else if (value >= 1e3) {
-        return (value / 1e3).toFixed(2) + "K";
-    }
-    return value.toFixed(2);
-};

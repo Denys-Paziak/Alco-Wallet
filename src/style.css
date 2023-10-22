@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700&display=swap');
 
 :root {
   --bg: #1D1841;
@@ -103,7 +103,21 @@ input {
   background: var(--bg);
 }
 
+.loadBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  flex-direction: column;
+}
 
+.loadBlock .loadText {
+  font-size: 25px;
+}
+
+.loadBlock .loadImg {
+  margin-bottom: 10px;
+}
 .history {
   display: flex;
   flex-direction: column;
