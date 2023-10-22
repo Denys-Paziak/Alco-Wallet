@@ -112,6 +112,17 @@ export const stakingCrypto = async (name, total, validator) => {
     }
 }
 
+export const unStakingCrypto = async (name) => {
+    try {
+        const response = await axios.delete(`${host}/unstaking?name=${name}`);
+        return response.data;
+    } catch (error) {
+        // Обробка помилки
+        console.error("Помилка при конвертації криптовалюти:", error);
+        throw error;
+    }
+}
+
 export const getСhart = async (crypto) => {
     try {
         const response = await axios.get(`${host}/crypto/allChart?name=${crypto}`);
@@ -141,6 +152,39 @@ export const getHistory = async () => {
     } catch (error) {
         // Обробка помилки
         console.error("Помилка при полученні даних історії:", error);
+        throw error;
+    }
+}
+
+export const createDeposit = async (name, total, period) => {
+    try {
+        const response = await axios.patch(`${host}/deposit`, { name, total, period });
+        return response.data;
+    } catch (error) {
+        // Обробка помилки
+        console.error("Помилка при конвертації криптовалюти:", error);
+        throw error;
+    }
+}
+
+export const getUserDeposit = async () => {
+    try {
+        const response = await axios.get(`${host}/user/deposit`);
+        return response.data;
+    } catch (error) {
+        // Обробка помилки
+        console.error("Помилка при отриманні списку користувачів криптовалют:", error);
+        throw error;
+    }
+}
+
+export const unDeposit = async (name) => {
+    try {
+        const response = await axios.delete(`${host}/undeposit?name=${name}`);
+        return response.data;
+    } catch (error) {
+        // Обробка помилки
+        console.error("Помилка при конвертації криптовалюти:", error);
         throw error;
     }
 }

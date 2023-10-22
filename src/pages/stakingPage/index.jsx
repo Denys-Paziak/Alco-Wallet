@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {getStakingCrypto} from "../../server";
-import {setStaking} from "../../slices/stakingSlice";
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
-import "./Staking.css";
+import loadImg from "./load.svg";
+import arrow from "./arrow.svg";
 
-import arrow from "./arrow.svg"
+import "./Staking.css";
 
 export default function StakingPage () {
     const staking  = useSelector(state => state.staking.staking);
@@ -14,8 +12,10 @@ export default function StakingPage () {
     let renderElement = null;
 
     if (staking === 'load') {
-        renderElement = <p>Loading...</p>
-        
+        renderElement = <div className='loadBlock'>
+                            <img className='loadImg' src={loadImg} alt="" />
+                            <p className='loadText'>Loading...</p>
+                        </div>
     } else {
         renderElement = staking.map((item) => {
             return (

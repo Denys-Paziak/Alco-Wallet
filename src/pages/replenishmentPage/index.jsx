@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { buyCrypto, getListUserCrypto, getBalance } from '../../server';
 import CurrencyDropdown from '../../Components/CurrencyDropdown/CurrencyDropdown';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { setCryptoBalance, setUSDBalance } from "../../slices/userSlice";
+import { setHistory } from '../../slices/historySlice';
+import { buyCrypto, getListUserCrypto, getBalance, getHistory } from '../../server';
 
-import CriptoForm from "../../Components/CryptoForm/CriptoForm";
+import CryptoForm from "../../Components/CryptoForm/CryptoForm";
 
 import arrow from "./arrow.svg";
 import checkImg from "./check.svg";
+import loadImg from "./load.svg";
 
-
-const tabsData = ["Instant Exchange", "Order History"]
+const tabsData = ["Buy crypto", "Order History"]
 
 export default function ReplenishmentPage() {
     const [activeTab, setTab] = useState(0);
@@ -86,8 +87,6 @@ const InstantExchange = () => {
     const [notification, setNotification] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-
-
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -108,7 +107,10 @@ const InstantExchange = () => {
     if (!marketSelectCripto || user === 'load') {
         return (
             <div className="replenishmentPage loading">
-                Loading...
+                <div className='loadBlock'>
+                    <img className='loadImg' src={loadImg} alt="" />
+                    <p className='loadText'>Loading...</p>
+                </div>
             </div>
         );
     } else {
@@ -118,12 +120,15 @@ const InstantExchange = () => {
 
                 buyCrypto(marketSelectCripto.symbol, userInputPrice)
                     .then(() => {
-                        getBalance().then((data) => {
-                            dispatch(setUSDBalance(data.balance));
-                        });
-                        getListUserCrypto().then((data) => {
-                            dispatch(setCryptoBalance(data.balanceCrypto));
+                        Promise.all([getBalance(), getListUserCrypto(), getHistory()]).then((response) => {
+                            dispatch(setUSDBalance(response[0].balance));
+                            dispatch(setCryptoBalance(response[1].balanceCrypto));
+                            dispatch(setHistory(response[2].userHistory));
+
                             showNotification('Currency purchased successfully', true);
+                            setIsLoading(false);
+                        }).catch(() => {
+                            showNotification('Transaction failed', false);
                             setIsLoading(false);
                         });
                     })
@@ -158,7 +163,7 @@ const InstantExchange = () => {
 
             if (parseFloat(value) > max) {
                 setLimitedInput("max");
-            } else if (parseFloat(value) < min) {
+            } else if ((parseFloat(value) < min) || !parseFloat(value)) {
                 setLimitedInput("min");
             } else {
                 setLimitedInput("value");
@@ -176,7 +181,7 @@ const InstantExchange = () => {
                             <div className="left">
                                 <img className='crypto-form__img' src={userSelectCripto.image} alt="" />
                                 <div className="row">
-                                    <CriptoForm
+                                    <CryptoForm
                                         inputHandler={setUserInputPrice}
                                         inputValue={userInputPrice}
                                         limitedValidator={limitedValidator}
@@ -203,7 +208,7 @@ const InstantExchange = () => {
                     <div className="right">
                         <img className='crypto-form__img' src={marketSelectCripto.image} alt="" />
                         <div className="row">
-                            <CriptoForm 
+                            <CryptoForm 
                                 inputHandler={setMarketInputPrice}
                                 inputValue={marketInputPrice} 
                                 readOnly />

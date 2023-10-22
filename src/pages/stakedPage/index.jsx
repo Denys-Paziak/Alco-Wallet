@@ -2,12 +2,14 @@ import { Link, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setUserStaking } from "../../slices/userSlice";
-import { getUserStaking, stakingCrypto } from '../../server';
+import { setUserStaking, setCryptoBalance } from "../../slices/userSlice";
+import { setHistory } from "../../slices/historySlice";
+import { getUserStaking, stakingCrypto, getHistory, getListUserCrypto } from '../../server';
 
-import CriptoForm from "../../Components/CryptoForm/CriptoForm";
+import CryptoForm from "../../Components/CryptoForm/CryptoForm";
 import CurrencyDropdown from '../../Components/CurrencyDropdown/CurrencyDropdown';
 
+import loadImg from "./load.svg";
 import arrowBack from "./arrow_back.svg";
 
 import "./Staked.css"
@@ -62,7 +64,10 @@ export default function StakedPage() {
         return (
             <div className="staked">
                 <div className='crypto-form'>
-                    Loading...
+                    <div className='loadBlock'>
+                        <img className='loadImg' src={loadImg} alt="" />
+                        <p className='loadText'>Loading...</p>
+                    </div>
                 </div>
             </div>
         );
@@ -72,9 +77,15 @@ export default function StakedPage() {
 
             stakingCrypto(pathname[2], totalStake, selectValidatorPushServer)
                 .then(() => {
-                    getUserStaking().then((data) => {
-                        dispatch(setUserStaking(data.userStaking));
+                    Promise.all([getUserStaking(), getHistory(), getListUserCrypto()]).then((response) => {
+                        dispatch(setUserStaking(response[0].userStaking));
+                        dispatch(setHistory(response[1].userHistory));
+                        dispatch(setCryptoBalance(response[2].balanceCrypto));
+
                         showNotification('Currency purchased successfully', true);
+                        setIsLoading(false);
+                    }).catch(() => {
+                        showNotification('Transaction failed', false);
                         setIsLoading(false);
                     });
                 })
@@ -98,7 +109,7 @@ export default function StakedPage() {
 
                 if (parseFloat(value) > max) {
                     setLimitedInput("max");
-                } else if (parseFloat(value) < min) {
+                } else if ((parseFloat(value) < min) || !parseFloat(value)) {
                     setLimitedInput("min");
                 } else {
                     setLimitedInput("value");
@@ -128,7 +139,7 @@ export default function StakedPage() {
                         <div className='crypto-form'>
                             <p>Amount</p>
                             <div className="input">
-                                <CriptoForm
+                                <CryptoForm
                                     inputHandler={setTotalStake}
                                     inputValue={totalStake}
                                     limitedValidator={limitedValidator} />
@@ -198,7 +209,7 @@ export default function StakedPage() {
                             onClick={buttonHandler}
                             disabled={isLoading || (limitedInput !== "value")} // Вимикаємо кнопку під час завантаження
                         >
-                            {isLoading ? 'Loading...' : 'Exchange'}
+                            {isLoading ? 'Loading...' : `Stake ${userSelectCripto.symbol.toUpperCase()}`}
                         </button>
                     </div>
                     {notification && (

@@ -1,0 +1,188 @@
+.deposit {
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+}
+
+.deposit .menuDeposit .title {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0.015em;
+    margin-bottom: 32px;
+}
+
+.deposit .menuDeposit .periodsTabs {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0px;
+    color: #888599;
+    border-bottom: 2px solid #FFFFFF4D;
+}
+
+.deposit .menuDeposit .periodsTabs .period {
+    flex-grow: 1;
+    text-align: center;
+    cursor: pointer;
+}
+
+.deposit .menuDeposit .periodsTabs .active {
+    color: #ffffff;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #ffffff;
+}
+
+.deposit .menuDeposit .periodsTabs .period span {
+    font-weight: 275;
+}
+
+.deposit .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    position: relative;
+}
+
+.deposit .main >img {
+
+}
+
+.deposit .main >p {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 60px;
+    letter-spacing: 0px;
+}
+
+.deposit .main .selectCripto {
+    max-width: 315px;
+}
+
+.deposit .main .selectCripto .inputBox {
+    position: relative;
+}
+
+.deposit .main .selectCripto .inputBox p {
+    position: absolute;
+    right: 0;
+    top: 5px;
+}
+
+.deposit .main .selectCripto .inputBox .width {
+    margin-bottom: 30px;
+    max-width: 305px;
+}
+
+.deposit .main .selectCripto .currencyCrypto {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.deposit .main .selectCripto .currencyCrypto .crypto {
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 48px;
+    letter-spacing: 0.015em;
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding: 0 5px;
+}
+
+.deposit .main .selectCripto .widthBtn {
+    margin: 0 auto;
+    width: 305px;
+    height: 60px;
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.deposit .main .selectCripto .disablet {
+    background: #7c798e;
+}
+
+.deposit .main .selectCripto .disablet:hover {
+    background: #7c798e;
+}
+
+.deposit .main .selectCripto .currencyCrypto .active {
+    border-bottom: 2px solid var(--main);
+}
+
+.deposit .main .selectCripto .balanceCrypto {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.deposit .main .selectCripto .balanceCrypto >span {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0.015em;
+}
+
+.deposit .main .selectCripto .balanceCrypto >span span {
+    color: #888599;
+}
+
+.deposit .main .selectCripto .labelForm {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0em;
+    color: #FFFFFF99;
+}
+
+.messageDeposit {
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 16px;
+    color: #FE3333;
+}
+
+.deposit .main .selectCripto .details {
+    position: absolute;
+    right: 60px;
+}
+
+.deposit .main .selectCripto .details .btn {
+    color: #888599;
+    cursor: pointer;
+}
+
+.deposit .main .selectCripto .details .text {
+    display: none;
+    position: relative;
+}
+
+.deposit .main .selectCripto .details .text span {
+    width: 450px;
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0.015em;
+    border: 1px solid #2F295E;
+    background: linear-gradient(0deg, #241E4E, #241E4E), linear-gradient(0deg, #2F295E, #2F295E);
+    box-shadow: 0px 4px 24px 0px #00000033;
+    padding: 16px 24px;
+    border-radius: 10px;
+}
+
+.deposit .main .selectCripto .show .text{
+    display: block;
+}
+
+.deposit .main .selectCripto .show .btn{
+    color: #ffffff;
+}

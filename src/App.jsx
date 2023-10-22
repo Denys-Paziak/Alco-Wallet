@@ -2,10 +2,10 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { useEffect } from "react";
 
-import { MainPage, ReplenishmentPage, ConvertationPage, BuyUSD, StakingPage, StakingInfo, CryptoPage, StakedPage, HistoryPage, SettingsPage } from "./pages";
+import { MainPage, ReplenishmentPage, ConvertationPage, BuyUSD, StakingPage, StakingInfo, CryptoPage, StakedPage, HistoryPage, SettingsPage, DepositPage } from "./pages";
 import Menu from './Components/Menu/Menu';
 
-import { setUSDBalance, setCryptoBalance, setTRDBalance, setUserStaking } from "./slices/userSlice";
+import { setUSDBalance, setCryptoBalance, setTRDBalance, setUserStaking, setUserDeposit } from "./slices/userSlice";
 import { setMarket } from "./slices/marketSlice";
 import { setStaking } from "./slices/stakingSlice";
 import { setChart7DaysAllCrypto } from "./slices/chartSlice";
@@ -42,6 +42,9 @@ function App() {
     server.getHistory().then((data) => {
       dispatch(setHistory(data.userHistory));
     });
+    server.getUserDeposit().then((data) => {
+      dispatch(setUserDeposit(data.userDeposit));
+    })
   }, []);
 
   return (
@@ -56,8 +59,9 @@ function App() {
           <Route exact path="staking" element={<StakingPage />} />
           <Route exact path="staking/:name" element={<StakingInfo />} />
           <Route exact path="staking/:name/stake" element={<StakedPage />} />
-          <Route exact path="history/" element={<HistoryPage />} />
-          <Route exact path="settings/" element={<SettingsPage />} />
+          <Route exact path="history" element={<HistoryPage />} />
+          <Route exact path="settings" element={<SettingsPage />} />
+          <Route exact path="deposit" element={<DepositPage/>}/>
         </Routes>
         <Menu />
       </div>

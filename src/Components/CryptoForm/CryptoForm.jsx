@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CriptoForm = ({ readOnly, inputHandler, inputValue, limitedValidator}) => {
+const CryptoForm = ({ readOnly, inputHandler, inputValue, limitedValidator}) => {
     const handleChange = (e) => {
         if (!readOnly) {
             const testRegular = /^(\d+\.{0,1}|\d*)(\d{0,18})?$/g.test(e.target.value);
@@ -22,7 +22,7 @@ const CriptoForm = ({ readOnly, inputHandler, inputValue, limitedValidator}) => 
     return (
         <input
             type="text"
-            className="crypto-form__input border"
+            className="crypto-form__input border width"
             onChange={handleChange}
             value={inputValue}
             readOnly={readOnly}
@@ -30,4 +30,4 @@ const CriptoForm = ({ readOnly, inputHandler, inputValue, limitedValidator}) => 
     );
 };
 
-export default CriptoForm;
+export default CryptoForm;
