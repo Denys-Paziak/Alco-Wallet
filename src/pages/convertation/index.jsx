@@ -15,6 +15,8 @@ import arrow from "./arrow.svg";
 import checkImg from "./check.svg"
 import loadImg from "./load.svg";
 
+import formatDate from '../../function/convertDate';
+import { BsArrowRight } from "react-icons/bs";
 import "./convertation.css";
 
 const tabsData = ["Instant Exchange", "Order History"]
@@ -52,26 +54,27 @@ const OrderHistory = () => {
     const history = useSelector(state => state.history.historyConvert);
     console.log(history);
     return (
-        <>
-            {history.map(el => {
+        <div className="history-container">
+            {history.map((el) => {
                 return (
+
                     <div key={el.id} className="history-item">
-                        <div className="history-item__date">
-                            {el.date}
+                        <div className="row">
+                            <div className="history-item__type">{formatDate(el.date)}</div>
+                            <div className="history-item__date"></div>
                         </div>
-                        <div className="history-item__crypto-info">
-                            <div className="history-item__name">
-                                {el.body.fromCrypto}
+                        <div className="row">
+                            <div className="history-item__from">{el.body.total} {el.body.fromCrypto.toUpperCase()}</div>
+                            <div className="history-item__arrow">
+                                <BsArrowRight />
                             </div>
-                            <div className="history-item__total">
-                                {el.body.total}
-                            </div>
+                            <div className="history-item__to">{el.body.resultConvert} {el.body.toCrypto.toUpperCase()}</div>
                         </div>
                     </div>
                 )
             })}
 
-        </>
+        </div>
     );
 }
 

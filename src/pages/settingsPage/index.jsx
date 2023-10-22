@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 
-const tabsData = ["Membership", "Security", "Private Keys"]
+const tabsData = ["Membership", "Security", "Private Keys"];
+
 export default function SettingsPage() {
     const [activeTab, setTab] = useState(0);
 
