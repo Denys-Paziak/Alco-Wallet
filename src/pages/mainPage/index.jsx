@@ -39,6 +39,7 @@ export default function MainPage() {
     const cryptoBalance = useSelector(state => state.user.cryptoBalance);
     const chart7DaysAllCrypto = useSelector(state => state.chart.chart7DaysAllCrypto);
 
+
     const [searchText, setSearchText] = useState("");
 
     if (market === 'load' || cryptoBalance === 'load' || chart7DaysAllCrypto === 'load') {

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import "./Tabs.css";
 
-import { getСhart } from '../../server';
-
 import { Line } from 'react-chartjs-2';
 const options = {
     responsive: true,
-    pointStyle: false,
 };
+
+
 
 const menuItem = ["Transactions", "Price chart", "About"];
 
@@ -52,47 +51,42 @@ export const Tabs = ({ name }) => {
 const Transactions = () => {
     return (
         <div className='transactions'>
-            Your USDT transactions will appear here
+
         </div>
     )
 }
 const PriceChart = ({ name }) => {
-    const [labelCharts, setLabelCharts] = useState([]);
-    const [dataCharts, setDataCharts] = useState([]);
 
-    console.log(labelCharts);
-    console.log(dataCharts);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const chartData = await getСhart(name);
-                console.log(chartData);
-                setLabelCharts(chartData.body.map(el => el.date));
-                setDataCharts(chartData.body.map(el => parseFloat(el.price)));
+    const labels = ['2008', '', '', '', '', '', '', '', '', '', '', '', '', '2009', "", "", '', '', '', '', '', '', '', '', '', '', '2010', '', '', '', '', '', '', '', '', '', '', '', '', '2011', '', '', '', '', '', '', '', '', '', '', '', '', '2012', '', '', '', '', '', '', '', '', '', '', '', '2013', '', '', '', ''];
 
 
+    const numPoints = 100;
 
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+    function generateRandomPatternArray(numPoints) {
+        const array = [];
+        let value = Math.random() * 5; // Початкове випадкове значення
 
-        fetchData();
-    }, []);
+        for (let i = 0; i < numPoints; i++) {
+            // Змінюємо значення на випадкову величину в межах [-2, 2]
+            value += Math.random() * 4 - 2;
 
-    const labels = ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', "2022", "2023"];
+            // Обмежуємо значення в межах [0, 60]
+            value = Math.max(0, Math.min(60, value));
 
-    function generateRandomNumber(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+            array.push(Math.round(value));
+        }
+
+        return array;
     }
+
+    const randomPatternArray = generateRandomPatternArray(numPoints);
 
     const data = {
         labels,
         datasets: [
             {
                 label: 'Dataset 1',
-                data: labels.map(() => generateRandomNumber(-1000, 1000)),
+                data: randomPatternArray,
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
@@ -101,7 +95,7 @@ const PriceChart = ({ name }) => {
 
 
     return (
-        <div style={{ width: "100%", height: "50px" }}>
+        <div className='chartCrypto'>
             <Line
                 options={options}
                 data={data}
@@ -111,8 +105,41 @@ const PriceChart = ({ name }) => {
 }
 const About = () => {
     return (
-        <div>
-            About
-        </div >
+        <div className="about-container">
+            <div className="about-item">
+                <img src="/about/1.jpg" alt="" />
+                <p>Ethereum vs Bitcoin: Differences between ETH and BTC</p>
+            </div>
+            <div className="about-item">
+                <img src="/about/2.jpg" alt="" />
+                <p>BCH vs. BTC - What's the difference between Bitcoin Cash and Bitcoin</p>
+            </div>
+            <div className="about-item">
+                <img src="/about/3.jpg" alt="" />
+                <p>What is Bitcoin: Explained
+                </p>
+            </div>
+            <div className="about-item">
+                <img src="/about/4.jpg" alt="" />
+                <p>How to Buy Bitcoin on Algo Wallet?</p>
+            </div>
+            <div className="about-item">
+                <img src="/about/5.jpg" alt="" />
+                <p>BCH vs. BTC - What's the difference between Bitcoin Cash and Bitcoin</p>
+            </div>
+            <div className="about-item">
+                <img src="/about/6.jpg" alt="" />
+                <p>How to Buy Bitcoin on Algo Wallet?</p>
+            </div>
+            <div className="about-item">
+                <img src="/about/7.jpg" alt="" />
+                <p>What is Bitcoin: Explained
+                </p>
+            </div>
+            <div className="about-item">
+                <img src="/about/8.jpg" alt="" />
+                <p>Ethereum vs Bitcoin: Differences between ETH and BTC</p>
+            </div>
+        </div>
     )
 }

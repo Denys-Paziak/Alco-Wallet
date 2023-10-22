@@ -57,7 +57,6 @@ function App() {
           <Route exact path="staking/:name" element={<StakingInfo />} />
           <Route exact path="staking/:name/stake" element={<StakedPage />} />
           <Route exact path="history/" element={<HistoryPage />} />
-          <Route exact path="settings/" element={<SettingsPage />} />
         </Routes>
         <Menu />
       </div>

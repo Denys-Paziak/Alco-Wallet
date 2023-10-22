@@ -47,12 +47,6 @@ const Menu = () => {
                         <p>History</p>
                     </div>
                 </NavLink>
-                <NavLink to="/settings" activeClassName="active">
-                    <div className='menu-item flex items-center gap-5'>
-                        <FiSettings />
-                        <p>Settings</p>
-                    </div>
-                </NavLink>
             </div>
         </div>
     );

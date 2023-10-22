@@ -28,3 +28,20 @@
     padding-top: 130px;
     opacity: 0.5;
 }
+
+.chartCrypto {
+    position: relative;
+}
+
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding: 40px 60px;
+}
+
+.about-item img {
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+}

@@ -102,3 +102,62 @@ input {
 .page-tabs div.active {
   background: var(--bg);
 }
+
+
+.history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.history-container {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.history-item .row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.history-item {
+  border-bottom: 1px solid hsl(249, 9%, 56%, 0.2);
+  margin-bottom: 16px;
+}
+
+.history-item.Buy .history-item__arrow {
+  color: #4caf50;
+}
+
+.history-item.Convert .history-item__arrow {
+  color: red;
+}
+
+.history-item__type {
+  color: var(--main);
+}
+
+.history-item__date {
+  opacity: 0.5;
+}
+
+.history-item__from,
+.history-item__to {
+  font-size: 24px;
+  font-weight: bold;
+  width: 400px;
+}
+
+.history-item__to {
+  text-align: right;
+}
+
+.history-item__arrow {
+  color: var(--main);
+  font-size: 30px;
+}

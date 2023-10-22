@@ -10,7 +10,8 @@ import CriptoForm from "../../Components/CryptoForm/CriptoForm";
 
 import arrow from "./arrow.svg";
 import checkImg from "./check.svg";
-
+import { BsArrowRight } from "react-icons/bs";
+import formatDate from '../../function/convertDate';
 
 const tabsData = ["Instant Exchange", "Order History"]
 
@@ -47,26 +48,27 @@ const OrderHistory = () => {
     const history = useSelector(state => state.history.historyBuy);
     console.log(history);
     return (
-        <>
+        <div className="history-container">
             {history.map(el => {
                 return (
-                    <div key={el.id} className="history-item">
-                        <div className="history-item__date">
-                            {el.date}
+
+                    <div className="history-item">
+                        <div className="row">
+                            <div className="history-item__type">{formatDate(el.date)}</div>
+                            <div className="history-item__date"></div>
                         </div>
-                        <div className="history-item__crypto-info">
-                            <div className="history-item__name">
-                                {el.body.name}
+                        <div className="row">
+                            <div className="history-item__from">{el.body.total} USD</div>
+                            <div className="history-item__arrow">
+                                <BsArrowRight />
                             </div>
-                            <div className="history-item__total">
-                                {el.body.total}
-                            </div>
+                            <div className="history-item__to">{el.body.resultBuy} {el.body.name.toUpperCase()}</div>
                         </div>
                     </div>
                 )
             })}
 
-        </>
+        </div>
     );
 }
 
@@ -203,14 +205,14 @@ const InstantExchange = () => {
                     <div className="right">
                         <img className='crypto-form__img' src={marketSelectCripto.image} alt="" />
                         <div className="row">
-                            <CriptoForm 
+                            <CriptoForm
                                 inputHandler={setMarketInputPrice}
-                                inputValue={marketInputPrice} 
+                                inputValue={marketInputPrice}
                                 readOnly />
 
-                            <CurrencyDropdown 
-                                list={market} 
-                                selected={marketSelectCripto} 
+                            <CurrencyDropdown
+                                list={market}
+                                selected={marketSelectCripto}
                                 setSelected={setMarketSelectCripto} />
                         </div>
                         <p className="reward-text">Reward: {marketInputPrice * 0.0303954} TRD</p>

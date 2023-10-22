@@ -33,7 +33,7 @@ const CryptoPage = () => {
                 <button>Send</button>
             </div>
 
-            <Tabs name={name} />
+            <Tabs name={market.symbol} />
         </div >
     )
 }
