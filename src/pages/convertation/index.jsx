@@ -52,7 +52,7 @@ export default function ConvertationPage() {
 
 const OrderHistory = () => {
     const history = useSelector(state => state.history.historyConvert);
-    console.log(history);
+
     return (
         <div className="history-container">
             {history.map((el) => {
@@ -107,6 +107,13 @@ const InstantExchange = () => {
             setMarketInputPrice(dolar / marketCripto.price);
         }
     }, [userSelectCripto, marketSelectCripto, userInputPrice]);
+
+    useEffect(() => {
+        if (market !== 'load') {
+            const filteredCryptoList = market.filter((item) => item.symbol !== userSelectCripto.name);
+            setMarketSelectCripto(filteredCryptoList[0]);
+        }
+    }, [userSelectCripto])
 
     useEffect(() => {
         if (user) {

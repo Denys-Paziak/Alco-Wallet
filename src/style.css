@@ -156,11 +156,13 @@ input {
   margin-bottom: 16px;
 }
 
-.history-item.Buy .history-item__arrow {
+.history-item.Unstaking .history-item__arrow,
+.history-item.Undeposit .history-item__arrow {
   color: #4caf50;
 }
 
-.history-item.Convert .history-item__arrow {
+.history-item.Staking .history-item__arrow,
+.history-item.Deposit .history-item__arrow  {
   color: red;
 }
 

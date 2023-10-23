@@ -299,12 +299,18 @@
 .noChart {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
-    height: 400px;
 }
 
 
 .chart-container {
     background: linear-gradient(to bottom, rgba(128, 74, 53, 0.2), rgba(128, 74, 53, 0));
+}
+
+.chartDeposit p {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0.015em;
+    margin-bottom: 30px;
 }

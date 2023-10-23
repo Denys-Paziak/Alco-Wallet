@@ -10,16 +10,78 @@
     display: flex;
 }
 
-h2 {
+.support h2 {
     margin-bottom: 50px;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0.015em;
+}
+
+.support .subTitle {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0px;
+    text-align: center;
+    
 }
 
 .support-item-container {
+    width: 450px;
     margin-top: 40px;
     margin-bottom: 50px;
+    justify-content: space-between;
 }
 
 .social {
     margin-top: 35px;
     margin-bottom: 35px;
+}
+
+.support-item-container .support-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.support-item-container .support-item img {
+    margin-bottom: 20px;
+}
+
+.support-item-container .support-item .text {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #FFFFFF80;
+}
+
+.support .titleSocial {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #FFFFFF80;
+    margin-bottom: 30px;
+}
+
+.support .social {
+    margin: 0 auto 25px;
+}
+
+.support .AlgoID {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+.support .AlgoID .ID {
+    display: flex;
+    justify-content: center;
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import CryptoForm from "../../Components/CryptoForm/CryptoForm";
@@ -18,12 +18,13 @@ import "./Deposit.css"
 
 
 const options = {
-    responsive: true,
+    responsive: true, 
 };
 
 export default function DepositPage() {
     const user = useSelector(state => state.user.cryptoBalance);
     const userDeposit = useSelector(state => state.user.deposit);
+    const history = useSelector(state => state.history.historyStaking);
 
     const [period, setPeriod] = useState(null);
     const [userSelectCripto, setUserSelectCripto] = useState(null);
@@ -40,7 +41,7 @@ export default function DepositPage() {
     useEffect(() => {
         if (user) {
             if (user !== 'load' && Object.values(user).length !== 0) {
-                setUserSelectCripto(user?.['usdc'] || { nane: "usdc", total: 0 });
+                setUserSelectCripto(user?.['usdc'] || { name: "usdc", total: 0 });
             }
         }
     }, [user]);
@@ -48,6 +49,7 @@ export default function DepositPage() {
     useEffect(() => {
         if (Object.values(userDeposit).length !== 0) {
             setPeriod(userDeposit.period);
+            setUserSelectCripto(userDeposit)
         }
     }, [userDeposit]);
 
@@ -87,6 +89,8 @@ export default function DepositPage() {
             </div>
         )
     } else {
+        console.log(userSelectCripto.name);
+
         const buttonHandler = (type) => {
             if (userInputPrice || type === 'undeposit') {
                 setIsLoading(true); // Починаємо завантаження
@@ -146,12 +150,14 @@ export default function DepositPage() {
         }
 
         function onShowDetails(e) {
-            if (e.target.textContent === "Details") {
-                e.currentTarget.classList.add("show");
-                e.target.textContent = "Close";
-            } else {
-                e.currentTarget.classList.remove("show");
-                e.target.textContent = "Details";
+            if (e.target.classList.contains("btn")) {
+                if (e.target.textContent === "Details") {
+                    e.currentTarget.classList.add("show");
+                    e.target.textContent = "Close";
+                } else {
+                    e.currentTarget.classList.remove("show");
+                    e.target.textContent = "Details";
+                }
             }
         }
 
@@ -239,9 +245,8 @@ export default function DepositPage() {
                                                 <div className="tabs">
                                                     <p className="active">Deposit history</p>
                                                 </div>
-                                                <div className="historyDeposit" style={{ display: historyLocal === 'deposit' ? "block" : "none" }}>
-
-
+                                                <div className="historyDeposit">
+                                                    <History history={history}/>
                                                 </div>
                                             </div>
                                             :
@@ -251,8 +256,7 @@ export default function DepositPage() {
                                                     <p className={historyLocal === 'order' ? "active" : ""} onClick={onTabsHistory} data-history="order">Order history</p>
                                                 </div>
                                                 <div className="historyDeposit" style={{ display: historyLocal === 'deposit' ? "block" : "none" }}>
-                                                    <History />
-
+                                                    <History history={history}/>
                                                 </div>
                                                 <div className="wraper" style={{ display: historyLocal === 'order' ? "block" : "none" }}>
                                                     <HistoryOrder period={period} />
@@ -266,11 +270,14 @@ export default function DepositPage() {
                                         Object.values(userDeposit).length === 0
                                             ?
                                             <div className="noChart">
-                                                <img src={bigDepositImg} alt="" />
-
+                                                <p>Profitability growth</p>
+                                                <PriceChart period={0}/>
                                             </div>
                                             :
-                                            <div><PriceChart /></div>
+                                            <div>
+                                                <p>Profitability growth</p>
+                                                <PriceChart period={period[1]}/>
+                                            </div>
                                     }
 
                                 </div>
@@ -309,8 +316,6 @@ function Message({ limitStatus }) {
 
 function HistoryOrder({ period }) {
     let records = 1;
-
-    console.log(period);
 
     switch (period[0]) {
         case 100:
@@ -461,10 +466,8 @@ function HistoryOrder({ period }) {
 
 
 
-function History() {
-
-    const history = useSelector(state => state.history.historyAll);
-    const reversedHistory = history.slice().reverse().filter(el => el.type === "Deposit" || el.type === "Undeposit");
+function History({history}) {
+    const reversedHistory = history.slice().reverse();
 
     if (reversedHistory.length > 0) {
         return (
@@ -485,12 +488,12 @@ function History() {
                         crypto = el.body.fromCrypto;
 
                         total = el.body.total;
-                        arrow = greenArrow;
+                        arrow =  redArrow;
                     } else if (el.type == "Undeposit") {
                         crypto = el.body.fromCrypto;
 
                         total = el.body.result;
-                        arrow = redArrow;
+                        arrow = greenArrow;
                     }
 
                     return (
@@ -498,7 +501,7 @@ function History() {
                             <img src={arrow} alt="" />
                             <p className="date">{date}</p>
                             <p className="total">{total}</p>
-                            <p className="crypto">{crypto}</p>
+                            <p className="crypto">{crypto.toUpperCase()}</p>
                         </div>
                     );
                 })}
@@ -509,12 +512,17 @@ function History() {
     }
 };
 
-const PriceChart = () => {
+const PriceChart = ({period}) => {
 
-    const labels = ['2008', '', '', '', '', '', '', '', '', '', '', '', '', '2009', "", "", '', '', '', '', '', '', '', '', '', '', '2010', '', '', '', '', '', '', '', '', '', '', '', '', '2011', '', '', '', '', '', '', '', '', '', '', '', '', '2012', '', '', '', '', '', '', '', '', '', '', '', '2013', '', '', '', ''];
+    const labels = [
+        'August', '', '', '', '', '', '', '', '', '', '', '', '', 
+        'September', '', '', '', '', '', '', '', '', '', '', '', '', 
+        'October', '', '', '', '', '', '', '', '', '', '', '', '',
+        
+    ];
 
 
-    const numPoints = 100;
+    const numPoints = !period ? 0 : 100;
 
     function generateRandomPatternArray(numPoints) {
         const array = [];
@@ -533,11 +541,12 @@ const PriceChart = () => {
         return array;
     }
 
-    const randomPatternArray = generateRandomPatternArray(numPoints);
+    const randomPatternArray = useMemo(() => generateRandomPatternArray(numPoints), [numPoints]);
 
 
     const data = {
-        labels,
+        labels: period ? labels : [''],
+        width: 400,
         datasets: [
             {
                 label: 'Dataset 1',
@@ -545,13 +554,14 @@ const PriceChart = () => {
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgb(255, 99, 132, 0.2)',
                 fill: true,
+                
             },
         ],
     };
 
 
     return (
-        <div className='chartCrypto'>
+        <div className='chartCrypto' style={{width: 600, height:400}}>
             <Line
                 options={options}
                 data={data}

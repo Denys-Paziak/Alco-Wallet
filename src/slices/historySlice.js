@@ -5,6 +5,7 @@ const initialState = {
     historyBuy: [],
     historyConvert: [],
     historyStaking: [],
+    historyStaking: []
 }
 
 export const historySlice = createSlice({
@@ -13,9 +14,10 @@ export const historySlice = createSlice({
     reducers: {
         setHistory: (state, action) => {
             state.historyAll = action.payload;
-            state.historyBuy = action.payload.filter((item) => item.type === 'Buy');
-            state.historyConvert = action.payload.filter((item) => item.type === 'Convert');
+            state.historyBuy = action.payload.filter((item) => item.type === 'Buy Crypto');
+            state.historyConvert = action.payload.filter((item) => item.type === 'Exchange');
             state.historyStaking = action.payload.filter((item) => item.type === 'Staking');
+            state.historyStaking = action.payload.filter((item) => item.type === "Deposit" || item.type === "Undeposit");
         }
     }
 })
