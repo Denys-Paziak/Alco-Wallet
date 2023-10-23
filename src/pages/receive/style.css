@@ -1,0 +1,30 @@
+.receive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.receive h2 {
+    margin-top: 100px;
+    border-bottom: 2px solid var(--main);
+}
+
+.receive img {
+    width: 200px;
+    height: 200px;
+    margin-top: 25px;
+}
+
+.receive .payer {
+    margin-top: 50px;
+}
+
+.receive button {
+    margin-top: 50px;
+}
+
+
+.receive .green {
+    color: aquamarine;
+    margin-top: 25px;
+}

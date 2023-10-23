@@ -18,6 +18,7 @@ import loadImg from "./load.svg";
 import formatDate from '../../function/convertDate';
 import { BsArrowRight } from "react-icons/bs";
 import "./convertation.css";
+import { BuyError } from '../../Components/BuyError/BuyError';
 
 const tabsData = ["Instant Exchange", "Order History"]
 
@@ -52,30 +53,35 @@ export default function ConvertationPage() {
 
 const OrderHistory = () => {
     const history = useSelector(state => state.history.historyConvert);
+    const reversedHistory = history.slice().reverse();
 
-    return (
-        <div className="history-container">
-            {history.map((el) => {
-                return (
+    if (reversedHistory.length > 0) {
+        return (
+            <div className="history-container">
+                {reversedHistory.map((el) => {
+                    return (
 
-                    <div key={el.id} className="history-item">
-                        <div className="row">
-                            <div className="history-item__type">{formatDate(el.date)}</div>
-                            <div className="history-item__date"></div>
-                        </div>
-                        <div className="row">
-                            <div className="history-item__from">{el.body.total} {el.body.fromCrypto.toUpperCase()}</div>
-                            <div className="history-item__arrow">
-                                <BsArrowRight />
+                        <div key={el.id} className="history-item">
+                            <div className="row">
+                                <div className="history-item__type">{formatDate(el.date)}</div>
+                                <div className="history-item__date"></div>
                             </div>
-                            <div className="history-item__to">{el.body.result} {el.body.toCrypto.toUpperCase()}</div>
+                            <div className="row">
+                                <div className="history-item__from">{el.body.total} {el.body.fromCrypto.toUpperCase()}</div>
+                                <div className="history-item__arrow">
+                                    <BsArrowRight />
+                                </div>
+                                <div className="history-item__to">{el.body.result} {el.body.toCrypto.toUpperCase()}</div>
+                            </div>
                         </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
 
-        </div>
-    );
+            </div>
+        );
+    } else {
+        <BuyError />
+    }
 }
 
 const InstantExchange = () => {

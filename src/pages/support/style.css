@@ -4,6 +4,11 @@
     align-items: center;
     flex-direction: column;
     padding-top: 70px;
+    color: hsla(0, 0%, 100%, 0.5);
+}
+
+.support a {
+    color: var(--main);
 }
 
 .support .row {

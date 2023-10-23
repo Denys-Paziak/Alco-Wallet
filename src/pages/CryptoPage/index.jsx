@@ -20,15 +20,15 @@ const CryptoPage = () => {
     const [market, setMarket] = useState(null);
 
     useEffect(() => {
-        if (marketArr !== 'load'  && userArr !== 'load') {
+        if (marketArr !== 'load' && userArr !== 'load') {
             if (Object.values(userArr).length !== 0) {
                 const crypto = marketArr.find(item => item.name === name)
-    
+
                 setMarket(crypto);
                 setUser(userArr[crypto.symbol]);
             }
         }
-        
+
     }, [marketArr, userArr])
 
     if (!market || userArr === 'load') {
@@ -41,8 +41,6 @@ const CryptoPage = () => {
             </div>
         )
     } else {
-        console.log()
-
         return (
             <div className='cryptoPage'>
                 <Link to={"/"} className='back'>
@@ -57,16 +55,18 @@ const CryptoPage = () => {
                     <div className="balanceInfo__crypto">
                         <p>{user?.total || 0} <span className='gray'>{market.symbol.toUpperCase()}</span></p>
                     </div>
-    
+
                     <div className="balanceInfo__USD">
                         <p>{user?.total / user?.courseOnDolar || 0} <span >USD</span></p>
                     </div>
                 </div>
                 <div className="сtyptoButtons">
-                    <button>Receive</button>
+                    <Link to={`/receive/${name}`}>
+                        <button>Receive</button>
+                    </Link>
                     <button>Send</button>
                 </div>
-    
+
                 <Tabs name={market.symbol} />
             </div >
         )

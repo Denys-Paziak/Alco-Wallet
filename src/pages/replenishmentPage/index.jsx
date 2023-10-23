@@ -15,6 +15,7 @@ import loadImg from "./load.svg";
 
 import { BsArrowRight } from "react-icons/bs";
 import formatDate from '../../function/convertDate';
+import { BuyError } from '../../Components/BuyError/BuyError';
 
 const tabsData = ["Buy crypto", "Order History"];
 
@@ -49,30 +50,35 @@ export default function ReplenishmentPage() {
 
 const OrderHistory = () => {
     const history = useSelector(state => state.history.historyBuy);
-    console.log(history);
-    return (
-        <div className="history-container">
-            {history.map(el => {
-                return (
+    const reversedHistory = history.slice().reverse();
 
-                    <div key={el.id} className="history-item">
-                        <div className="row">
-                            <div className="history-item__type">{formatDate(el.date)}</div>
-                            <div className="history-item__date"></div>
-                        </div>
-                        <div className="row">
-                            <div className="history-item__from">{el.body.total} USD</div>
-                            <div className="history-item__arrow">
-                                <BsArrowRight />
+    if (reversedHistory.length > 0) {
+        return (
+            <div className="history-container">
+                {reversedHistory.map(el => {
+                    return (
+
+                        <div key={el.id} className="history-item">
+                            <div className="row">
+                                <div className="history-item__type">{formatDate(el.date)}</div>
+                                <div className="history-item__date"></div>
                             </div>
-                            <div className="history-item__to">{el.body.result} {el.body.toCrypto.toUpperCase()}</div>
+                            <div className="row">
+                                <div className="history-item__from">{el.body.total} USD</div>
+                                <div className="history-item__arrow">
+                                    <BsArrowRight />
+                                </div>
+                                <div className="history-item__to">{el.body.result} {el.body.toCrypto.toUpperCase()}</div>
+                            </div>
                         </div>
-                    </div>
-                )
-            })}
- 
-        </div>
-    );
+                    )
+                })}
+
+            </div>
+        );
+    } else {
+        <BuyError />
+    }
 }
 
 const InstantExchange = () => {
@@ -212,7 +218,7 @@ const InstantExchange = () => {
                     <div className="right">
                         <img className='crypto-form__img' src={marketSelectCripto.image} alt="" />
                         <div className="row">
-                            <CryptoForm 
+                            <CryptoForm
                                 inputHandler={setMarketInputPrice}
                                 inputValue={marketInputPrice}
                                 readOnly />

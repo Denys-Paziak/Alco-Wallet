@@ -2,6 +2,8 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 const CryptoChart = ({ chartData }) => {
+
+
     const options = {
         responsive: true,
         pointStyle: false,

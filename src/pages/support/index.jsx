@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { BiSolidBookReader, BiSolidVideos, BiMessageDetail } from "react-icons/bi";
-
 import book from "./book.svg";
 import mess from "./mess.svg";
 import video from "./video.svg";

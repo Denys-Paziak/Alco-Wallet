@@ -36,6 +36,30 @@ export const options = {
     },
 };
 
+const labels = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', "", "", '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
+
+
+const numPoints = 100;
+
+function generateRandomPatternArray(numPoints) {
+    const array = [];
+    let value = Math.random() * 5; // Початкове випадкове значення
+
+    for (let i = 0; i < numPoints; i++) {
+        // Змінюємо значення на випадкову величину в межах [-2, 2]
+        value += Math.random() * 4 - 2;
+
+        // Обмежуємо значення в межах [0, 60]
+        value = Math.max(0, Math.min(60, value));
+
+        array.push(Math.round(value));
+    }
+
+    return array;
+}
+
+
+
 export default function MainPage() {
     const market = useSelector(state => state.market.market);
     const cryptoBalance = useSelector(state => state.user.cryptoBalance);
@@ -97,14 +121,50 @@ export default function MainPage() {
                     <p className="table-item text-gray-400 text-lg font-semibold">No results found.</p>
                 ) : (
                     filteredMarket.map((crypto) => {
+                        const randomPatternArray = generateRandomPatternArray(numPoints);
+
+                        const data = {
+                            labels,
+                            datasets: [
+                                {
+                                    label: 'Dataset 1',
+                                    data: randomPatternArray,
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    backgroundColor: 'rgb(255, 99, 132, 0)',
+                                },
+                            ],
+                        };
+
+
                         const statusStyle = parseFloat(crypto.change) < 0 ? 'red' : 'green';
 
                         let name;
+                        let value;
+                        let valueTitle;
+                        let balance;
+                        let balanceTitle;
 
                         if (crypto.name.length > 9) {
                             name = crypto.name.slice(0, 9) + "...";
                         } else {
                             name = crypto.name;
+                        }
+
+                        if (cryptoBalance?.[crypto.symbol]?.total.toString().length > 9) {
+                            balance = cryptoBalance?.[crypto.symbol]?.total.toString().slice(0, 9) + "...";
+                            balanceTitle = cryptoBalance?.[crypto.symbol]?.total;
+                        } else {
+                            balance = cryptoBalance?.[crypto.symbol]?.total;
+                        }
+
+
+
+
+                        if (((cryptoBalance?.[crypto.symbol]?.total) * crypto.price).toString().length > 9) {
+                            value = ((cryptoBalance?.[crypto.symbol]?.total) * crypto.price).toString().slice(0, 9) + "...";
+                            valueTitle = ((cryptoBalance?.[crypto.symbol]?.total) * crypto.price);
+                        } else {
+                            value = ((cryptoBalance?.[crypto.symbol]?.total) * crypto.price);
                         }
 
                         return (
@@ -114,25 +174,15 @@ export default function MainPage() {
                                     <p>{name}</p>
                                 </div>
                                 <div className='table-item__balance'>
-                                    <span className='total'>{cryptoBalance?.[crypto.symbol]?.total || 0} </span>
+                                    <span className='total' title={balanceTitle}>{balance || 0} </span>
                                     <span className='symbol'>{crypto.symbol.toUpperCase()}</span>
                                 </div>
-                                <p className='table-item__value'>{(cryptoBalance?.[crypto.symbol]?.total || 0) * crypto.price}</p>
+                                <p className='table-item__value' title={valueTitle}>{value || 0}</p>
                                 <p className='table-item__price'>${crypto.price}</p>
                                 <p className={`table-item__24h ${statusStyle}`}>{crypto.change.toFixed(2)}</p>
                                 {/* Відобразіть дані про портфоліо для кожної криптовалюти */}
                                 <div className='table-item__chart'>
-                                    <CryptoChart chartData={{
-                                        labels: ['', '', '', '', '', '', ''],
-                                        datasets: [
-                                            {
-                                                label: 'Dataset 4',
-                                                data: chart7DaysAllCrypto?.[crypto.name]?.map(el => el.price),
-                                                borderColor: 'rgb(53, 162, 2325)',
-                                                fill: false,
-                                            },
-                                        ],
-                                    }} />
+                                    <CryptoChart chartData={data} />
                                 </div>
                             </Link>
                         );

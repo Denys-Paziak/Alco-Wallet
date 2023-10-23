@@ -76,7 +76,7 @@ const Transactions = ({ name }) => {
                             right = `${el.body.total} ${el.body.fromCrypto}`;
                             title = "Make a deposit";
                         } else if (el.type == "Undeposit") {
-                            left = `${el.body} days deposit`;
+                            left = `${el.body.result} days deposit`;
                             right = `${el.body.total} ${el.body.fromCrypto}`;
                             title = "Withdrawal of deposit";
                         } else {
