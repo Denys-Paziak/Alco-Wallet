@@ -3,7 +3,7 @@ import { BiSolidWalletAlt } from "react-icons/bi";
 import { AiOutlinePlus, AiOutlineHistory } from "react-icons/ai";
 import { LiaExchangeAltSolid } from "react-icons/lia";
 import { BsFillLayersFill } from "react-icons/bs";
-import { FiSettings } from "react-icons/fi";
+import { BiSupport } from "react-icons/bi";
 import Balance from "../Balance/Balance"
 import { NavLink } from "react-router-dom";
 
@@ -44,7 +44,7 @@ const Menu = () => {
                 </NavLink>
                 <NavLink to="/deposit" activeClassName="active">
                     <div className='menu-item flex items-center gap-5'>
-                        <img style={{width: 20}} src={depositImg} alt="" />
+                        <img style={{ width: 20 }} src={depositImg} alt="" />
                         <p>Deposit</p>
                     </div>
                 </NavLink>
@@ -52,6 +52,12 @@ const Menu = () => {
                     <div className='menu-item flex items-center gap-5'>
                         <AiOutlineHistory />
                         <p>History</p>
+                    </div>
+                </NavLink>
+                <NavLink to="/support" activeClassName="active">
+                    <div className='menu-item flex items-center gap-5'>
+                        <BiSupport />
+                        <p>Support</p>
                     </div>
                 </NavLink>
             </div>

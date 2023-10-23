@@ -10,7 +10,7 @@ export const BuyError = () => {
         <img src="/buyImage.png" alt="buyImage" />
         <NavLink to="/replenishment">
             <button>
-                Buy bitcoin
+                Buy
             </button>
         </NavLink>
     </div>

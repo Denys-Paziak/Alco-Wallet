@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { BuyError } from '../BuyError/BuyError';
+import { BsArrowRight } from "react-icons/bs";
+import { useSelector } from 'react-redux';
+import formatDate from '../../function/convertDate';
 import "./Tabs.css";
 
 import { Line } from 'react-chartjs-2';
@@ -15,7 +19,7 @@ export const Tabs = ({ name }) => {
     let showComponent;
 
     if (activeElMenu === 0) {
-        showComponent = <Transactions />
+        showComponent = <Transactions name={name} />
     }
 
     if (activeElMenu === 1) {
@@ -48,12 +52,64 @@ export const Tabs = ({ name }) => {
 }
 
 
-const Transactions = () => {
-    return (
-        <div className='transactions'>
+const Transactions = ({ name }) => {
+    const history = useSelector(state => state.history.historyAll);
+    const reversedHistory = history.slice().reverse().filter(el => el.body?.fromCrypto === name || el.body?.toCrypto === name);
 
+
+    if (reversedHistory.length > 0) {
+
+
+        return <div className='history'>
+            <p>Your transaction history </p>
+
+            <div className="history-container">
+                {
+                    reversedHistory.map(el => {
+
+                        let left;
+                        let right;
+                        let title;
+
+                        if (el.type == "Deposit") {
+                            left = `${el.body.period[0]} days deposit`;
+                            right = `${el.body.total} ${el.body.fromCrypto}`;
+                            title = "Make a deposit";
+                        } else if (el.type == "Undeposit") {
+                            left = `${el.body} days deposit`;
+                            right = `${el.body.total} ${el.body.fromCrypto}`;
+                            title = "Withdrawal of deposit";
+                        } else {
+                            left = `${el.body.total} ${el.body.fromCrypto}`;
+                            right = `${el.body.result} ${el.body.toCrypto}`;
+                            title = el.type;
+                        }
+
+
+                        return (
+                            <div className={`history-item ${el.type}`}>
+                                <div className="row">
+                                    <div className="history-item__type">{title}</div>
+                                    <div className="history-item__date">{formatDate(el.date)}</div>
+                                </div>
+                                <div className="row">
+                                    <div className="history-item__from">{left}</div>
+                                    <div className="history-item__arrow">
+                                        <BsArrowRight />
+                                    </div>
+                                    <div className="history-item__to">{right}</div>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+
+            </div>
         </div>
-    )
+    } else {
+        return <BuyError />
+    }
+
 }
 const PriceChart = ({ name }) => {
 
@@ -88,7 +144,8 @@ const PriceChart = ({ name }) => {
                 label: 'Dataset 1',
                 data: randomPatternArray,
                 borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                backgroundColor: 'rgb(255, 99, 132, 0.2)',
+                fill: true,
             },
         ],
     };

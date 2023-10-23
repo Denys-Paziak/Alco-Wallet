@@ -5,6 +5,9 @@ import CryptoForm from "../../Components/CryptoForm/CryptoForm";
 import { setHistory } from "../../slices/historySlice";
 import { setUserDeposit, setCryptoBalance } from "../../slices/userSlice";
 import { createDeposit, getHistory, getUserDeposit, getListUserCrypto, unDeposit } from "../../server";
+import { BuyError } from '../../Components/BuyError/BuyError';
+import { Line } from 'react-chartjs-2';
+
 
 import bigDepositImg from "./bigDeposit.svg";
 import loadImg from "./load.svg";
@@ -12,6 +15,11 @@ import redArrow from "./red.svg"
 import greenArrow from "./green.svg"
 
 import "./Deposit.css"
+
+
+const options = {
+    responsive: true,
+};
 
 export default function DepositPage() {
     const user = useSelector(state => state.user.cryptoBalance);
@@ -163,7 +171,7 @@ export default function DepositPage() {
                 {
                     !period
                         ?
-                        <div className="main" style={{height: "70vh"}}>
+                        <div className="main" style={{ height: "70vh" }}>
                             <img src={bigDepositImg} alt="" />
                             <p>Select deposit period</p>
                         </div>
@@ -226,43 +234,45 @@ export default function DepositPage() {
                                 <div className="tabsHistory">
                                     {
                                         Object.values(userDeposit).length === 0
-                                        ?
-                                        <div className="limit">
-                                            <div className="tabs">
-                                                <p className="active">Deposit history</p>
-                                            </div>
-                                            <div className="historyDeposit" style={{display: historyLocal === 'deposit' ? "block" : "none"}}>
+                                            ?
+                                            <div className="limit">
+                                                <div className="tabs">
+                                                    <p className="active">Deposit history</p>
+                                                </div>
+                                                <div className="historyDeposit" style={{ display: historyLocal === 'deposit' ? "block" : "none" }}>
 
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        :
-                                        <div className="limit">
-                                            <div className="tabs">
-                                                <p className={historyLocal === 'deposit' ? "active" : ""} onClick={onTabsHistory} data-history="deposit">Deposit history</p>
-                                                <p className={historyLocal === 'order' ? "active" : ""} onClick={onTabsHistory} data-history="order">Order history</p>
-                                            </div>
-                                            <div className="historyDeposit" style={{display: historyLocal === 'deposit' ? "block" : "none"}}>
+                                            :
+                                            <div className="limit">
+                                                <div className="tabs">
+                                                    <p className={historyLocal === 'deposit' ? "active" : ""} onClick={onTabsHistory} data-history="deposit">Deposit history</p>
+                                                    <p className={historyLocal === 'order' ? "active" : ""} onClick={onTabsHistory} data-history="order">Order history</p>
+                                                </div>
+                                                <div className="historyDeposit" style={{ display: historyLocal === 'deposit' ? "block" : "none" }}>
+                                                    <History />
 
-
+                                                </div>
+                                                <div className="wraper" style={{ display: historyLocal === 'order' ? "block" : "none" }}>
+                                                    <HistoryOrder period={period} />
+                                                </div>
                                             </div>
-                                            <div className="wraper" style={{display: historyLocal === 'order' ? "block" : "none"}}>
-                                                <HistoryOrder period={period} />
-                                            </div>
-                                        </div>
                                     }
-                                    
+
                                 </div>
                                 <div className="chartDeposit">
                                     {
                                         Object.values(userDeposit).length === 0
-                                        ?
-                                        <div className="noChart">
-                                            <img src={bigDepositImg} alt="" />
-                                        </div>
-                                        :
-                                        <div>Profitability growth</div>
+                                            ?
+                                            <div className="noChart">
+                                                <img src={bigDepositImg} alt="" />
+
+                                            </div>
+                                            :
+                                            <div><PriceChart /></div>
                                     }
+
                                 </div>
                             </div>
                         </div>
@@ -326,119 +336,119 @@ function HistoryOrder({ period }) {
 
     for (let i = 0; i < records; i++) {
         elem.push(<div>
-        <div className="record">
-            <img src={greenArrow} alt="" />
-            <p className="date">10.10.2023</p>
-            <p className="total">{0.000411 * period[1]}</p>
-            <p className="crypto">BTH</p>
-        </div>
-        <div className="record">
-            <img src={greenArrow} alt="" />
-            <p className="date">12.10.2023</p>
-            <p className="total">{0.04 * period[1]}</p>
-            <p className="crypto">MKR</p>
-        </div>
-        <div className="record">
-            <img src={greenArrow} alt="" />
-            <p className="date">13.10.2023</p>
-            <p className="total">{(32.072 * period[1]).toFixed(4)}</p>
-            <p className="crypto">AAVE</p>
-        </div>
-        <div className="record">
-            <img src={redArrow} alt="" />
-            <p className="date">13.10.2023</p>
-            <p className="total">{0.000411 * period[1]}</p>
-            <p className="crypto">BTH</p>
-        </div>
-        <div className="record">
-            <img src={greenArrow} alt="" />
-            <p className="date">15.10.2023</p>
-            <p className="total">{51 * period[1]}</p>
-            <p className="crypto">LTC</p>
-        </div>
-        <div className="record">
-            <img src={greenArrow} alt="" />
-            <p className="date">19.10.2023</p>
-            <p className="total">{(112.099 * period[1]).toFixed(4)}</p>
-            <p className="crypto">SOL</p>
-        </div>
-        <div className="record">
-            <img src={redArrow} alt="" />
-            <p className="date">19.10.2023</p>
-            <p className="total">{0.04 * period[1]}</p>
-            <p className="crypto">MKR</p>
-        </div>
-        <div className="record">
-            <img src={redArrow} alt="" />
-            <p className="date">20.10.2023</p>
-            <p className="total">{(9.072 * period[1]).toFixed(4)}</p>
-            <p className="crypto">AAVE</p>
-        </div>
-        <div className="record">
-            <img src={redArrow} alt="" />
-            <p className="date">21.10.2023</p>
-            <p className="total">{51 * period[1]}</p>
-            <p className="crypto">LTC</p>
-        </div><div className="record">
-            <img src={redArrow} alt="" />
-            <p className="date">21.10.2023</p>
-            <p className="total">{(112.099 * period[1]).toFixed(4)}</p>
-            <p className="crypto">SOL</p>
-        </div>
-        <div className="record">
-            <img src={greenArrow} alt="" />
-            <p className="date">13.10.2023</p>
-            <p className="total">{(2.072 * period[1]).toFixed(4)}</p>
-            <p className="crypto">AAVE</p>
-        </div>
-        <div className="record">
-            <img src={redArrow} alt="" />
-            <p className="date">13.10.2023</p>
-            <p className="total">{0.000411 * period[1]}</p>
-            <p className="crypto">BTH</p>
-        </div>
-        <div className="record">
-            <img src={greenArrow} alt="" />
-            <p className="date">15.10.2023</p>
-            <p className="total">{51 * period[1]}</p>
-            <p className="crypto">LTC</p>
-        </div>
-        <div className="record">
-            <img src={greenArrow} alt="" />
-            <p className="date">19.10.2023</p>
-            <p className="total">{(112.099 * period[1]).toFixed(4)}</p>
-            <p className="crypto">SOL</p>
-        </div>
-        <div className="record">
-            <img src={redArrow} alt="" />
-            <p className="date">19.10.2023</p>
-            <p className="total">{0.04 * period[1]}</p>
-            <p className="crypto">MKR</p>
-        </div>
-        <div className="record">
-            <img src={greenArrow} alt="" />
-            <p className="date">15.10.2023</p>
-            <p className="total">{51 * period[1]}</p>
-            <p className="crypto">LTC</p>
-        </div>
-        <div className="record">
-            <img src={greenArrow} alt="" />
-            <p className="date">19.10.2023</p>
-            <p className="total">{(112.099 * period[1]).toFixed(4)}</p>
-            <p className="crypto">SOL</p>
-        </div>
-        <div className="record">
-            <img src={redArrow} alt="" />
-            <p className="date">19.10.2023</p>
-            <p className="total">{0.04 * period[1]}</p>
-            <p className="crypto">MKR</p>
-        </div>
-        <div className="record">
-            <img src={redArrow} alt="" />
-            <p className="date">20.10.2023</p>
-            <p className="total">{(12.072 * period[1]).toFixed(4)}</p>
-            <p className="crypto">AAVE</p>
-        </div>
+            <div className="record">
+                <img src={greenArrow} alt="" />
+                <p className="date">10.10.2023</p>
+                <p className="total">{0.000411 * period[1]}</p>
+                <p className="crypto">BTH</p>
+            </div>
+            <div className="record">
+                <img src={greenArrow} alt="" />
+                <p className="date">12.10.2023</p>
+                <p className="total">{0.04 * period[1]}</p>
+                <p className="crypto">MKR</p>
+            </div>
+            <div className="record">
+                <img src={greenArrow} alt="" />
+                <p className="date">13.10.2023</p>
+                <p className="total">{(32.072 * period[1]).toFixed(4)}</p>
+                <p className="crypto">AAVE</p>
+            </div>
+            <div className="record">
+                <img src={redArrow} alt="" />
+                <p className="date">13.10.2023</p>
+                <p className="total">{0.000411 * period[1]}</p>
+                <p className="crypto">BTH</p>
+            </div>
+            <div className="record">
+                <img src={greenArrow} alt="" />
+                <p className="date">15.10.2023</p>
+                <p className="total">{51 * period[1]}</p>
+                <p className="crypto">LTC</p>
+            </div>
+            <div className="record">
+                <img src={greenArrow} alt="" />
+                <p className="date">19.10.2023</p>
+                <p className="total">{(112.099 * period[1]).toFixed(4)}</p>
+                <p className="crypto">SOL</p>
+            </div>
+            <div className="record">
+                <img src={redArrow} alt="" />
+                <p className="date">19.10.2023</p>
+                <p className="total">{0.04 * period[1]}</p>
+                <p className="crypto">MKR</p>
+            </div>
+            <div className="record">
+                <img src={redArrow} alt="" />
+                <p className="date">20.10.2023</p>
+                <p className="total">{(9.072 * period[1]).toFixed(4)}</p>
+                <p className="crypto">AAVE</p>
+            </div>
+            <div className="record">
+                <img src={redArrow} alt="" />
+                <p className="date">21.10.2023</p>
+                <p className="total">{51 * period[1]}</p>
+                <p className="crypto">LTC</p>
+            </div><div className="record">
+                <img src={redArrow} alt="" />
+                <p className="date">21.10.2023</p>
+                <p className="total">{(112.099 * period[1]).toFixed(4)}</p>
+                <p className="crypto">SOL</p>
+            </div>
+            <div className="record">
+                <img src={greenArrow} alt="" />
+                <p className="date">13.10.2023</p>
+                <p className="total">{(2.072 * period[1]).toFixed(4)}</p>
+                <p className="crypto">AAVE</p>
+            </div>
+            <div className="record">
+                <img src={redArrow} alt="" />
+                <p className="date">13.10.2023</p>
+                <p className="total">{0.000411 * period[1]}</p>
+                <p className="crypto">BTH</p>
+            </div>
+            <div className="record">
+                <img src={greenArrow} alt="" />
+                <p className="date">15.10.2023</p>
+                <p className="total">{51 * period[1]}</p>
+                <p className="crypto">LTC</p>
+            </div>
+            <div className="record">
+                <img src={greenArrow} alt="" />
+                <p className="date">19.10.2023</p>
+                <p className="total">{(112.099 * period[1]).toFixed(4)}</p>
+                <p className="crypto">SOL</p>
+            </div>
+            <div className="record">
+                <img src={redArrow} alt="" />
+                <p className="date">19.10.2023</p>
+                <p className="total">{0.04 * period[1]}</p>
+                <p className="crypto">MKR</p>
+            </div>
+            <div className="record">
+                <img src={greenArrow} alt="" />
+                <p className="date">15.10.2023</p>
+                <p className="total">{51 * period[1]}</p>
+                <p className="crypto">LTC</p>
+            </div>
+            <div className="record">
+                <img src={greenArrow} alt="" />
+                <p className="date">19.10.2023</p>
+                <p className="total">{(112.099 * period[1]).toFixed(4)}</p>
+                <p className="crypto">SOL</p>
+            </div>
+            <div className="record">
+                <img src={redArrow} alt="" />
+                <p className="date">19.10.2023</p>
+                <p className="total">{0.04 * period[1]}</p>
+                <p className="crypto">MKR</p>
+            </div>
+            <div className="record">
+                <img src={redArrow} alt="" />
+                <p className="date">20.10.2023</p>
+                <p className="total">{(12.072 * period[1]).toFixed(4)}</p>
+                <p className="crypto">AAVE</p>
+            </div>
         </div>)
     }
 
@@ -446,5 +456,106 @@ function HistoryOrder({ period }) {
         <div className="historyOrder">
             {elem}
         </div>
+    )
+}
+
+
+
+function History() {
+
+    const history = useSelector(state => state.history.historyAll);
+    const reversedHistory = history.slice().reverse().filter(el => el.type === "Deposit" || el.type === "Undeposit");
+
+    if (reversedHistory.length > 0) {
+        return (
+            <div className="historyOrder">
+                {reversedHistory.map(el => {
+                    let date;
+                    let total;
+                    let crypto;
+                    let arrow;
+
+
+                    const timestamp = new Date(el.date);
+                    date = `${timestamp.getDate().toString().padStart(2, '0')}.${(timestamp.getMonth() + 1).toString().padStart(2, '0')}.${timestamp.getFullYear()}`;
+                    total = el.type === "Deposit" ? el.body.total : el.body.result;
+
+
+                    if (el.type == "Deposit") {
+                        crypto = el.body.fromCrypto;
+
+                        total = el.body.total;
+                        arrow = greenArrow;
+                    } else if (el.type == "Undeposit") {
+                        crypto = el.body.fromCrypto;
+
+                        total = el.body.result;
+                        arrow = redArrow;
+                    }
+
+                    return (
+                        <div className="record" key={el.id}>
+                            <img src={arrow} alt="" />
+                            <p className="date">{date}</p>
+                            <p className="total">{total}</p>
+                            <p className="crypto">{crypto}</p>
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    } else {
+        return <BuyError />;
+    }
+};
+
+const PriceChart = () => {
+
+    const labels = ['2008', '', '', '', '', '', '', '', '', '', '', '', '', '2009', "", "", '', '', '', '', '', '', '', '', '', '', '2010', '', '', '', '', '', '', '', '', '', '', '', '', '2011', '', '', '', '', '', '', '', '', '', '', '', '', '2012', '', '', '', '', '', '', '', '', '', '', '', '2013', '', '', '', ''];
+
+
+    const numPoints = 100;
+
+    function generateRandomPatternArray(numPoints) {
+        const array = [];
+        let value = Math.random() * 5; // Початкове випадкове значення
+
+        for (let i = 0; i < numPoints; i++) {
+            // Змінюємо значення на випадкову величину в межах [-2, 2]
+            value += Math.random() * 4 - 2;
+
+            // Обмежуємо значення в межах [0, 60]
+            value = Math.max(0, Math.min(60, value));
+
+            array.push(Math.round(value));
+        }
+
+        return array;
+    }
+
+    const randomPatternArray = generateRandomPatternArray(numPoints);
+
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Dataset 1',
+                data: randomPatternArray,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgb(255, 99, 132, 0.2)',
+                fill: true,
+            },
+        ],
+    };
+
+
+    return (
+        <div className='chartCrypto'>
+            <Line
+                options={options}
+                data={data}
+            />
+        </div >
     )
 }

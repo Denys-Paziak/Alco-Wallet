@@ -1,0 +1,25 @@
+.support {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 70px;
+}
+
+.support .row {
+    display: flex;
+}
+
+h2 {
+    margin-bottom: 50px;
+}
+
+.support-item-container {
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.social {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
