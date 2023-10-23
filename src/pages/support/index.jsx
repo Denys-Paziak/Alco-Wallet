@@ -17,13 +17,13 @@ const SupportPage = () => {
                         Knowledge Base
                     </div>
                 </div>
-                <div className="item">
+                <div className="support-item">
                     <div className="icon"><BiMessageDetail /></div>
                     <div className="text">
                         Contact Support
                     </div>
                 </div>
-                <div className="item">
+                <div className="support-item">
                     <div className="icon"><BiSolidVideos /></div>
                     <div className="text">
                         Video
@@ -39,7 +39,7 @@ const SupportPage = () => {
                 <div className="icon"></div>
             </div>
             <p>Anonymous Algo ID</p>
-            <p>a3722dcbab7678...f1800159c853b3</p>
+            <p className='payer'>a3722dcbab7678...f1800159c853b3</p>
         </div>
     )
 }
