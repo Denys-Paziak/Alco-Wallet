@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BuyError } from '../BuyError/BuyError';
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
 import { useSelector } from 'react-redux';
 import formatDate from '../../function/convertDate';
 import "./Tabs.css";
@@ -66,36 +66,50 @@ const Transactions = ({ name }) => {
             <div className="history-container">
                 {
                     reversedHistory.map(el => {
-
+    
                         let left;
+                        let subLeft = null; 
                         let right;
                         let title;
+                        let arrow  = <BsArrowRight />;
 
-                        if (el.type == "Deposit") {
-                            left = `${el.body.period[0]} days deposit`;
-                            right = `${el.body.total} ${el.body.fromCrypto}`;
+                        if (el.type === "Deposit") {
+                            left =  `${el.body.total} ${el.body.fromCrypto.toUpperCase()}`;
+                            right = `${el.body.period[0]} days deposit`;
                             title = "Make a deposit";
-                        } else if (el.type == "Undeposit") {
-                            left = `${el.body.result} days deposit`;
-                            right = `${el.body.total} ${el.body.fromCrypto}`;
+                        } else if (el.type === "Undeposit") {
+                            left = `${el.body.result} ${el.body.fromCrypto.toUpperCase()}`;
+                            subLeft = `${el.body.result - el.body.total} Earnings`
+                            right = `${el.body.period[0]} days deposit`;
                             title = "Withdrawal of deposit";
+                            arrow = <BsArrowLeft />;
+                        } else if (el.type === "Staking") {
+                            left = `${el.body.total} ${el.body.fromCrypto.toUpperCase()}`;
+                            right = `${el.body.validator } Validator`;
+                            title = el.type;
+                        } else if (el.type === "Unstaking") {
+                            left = `${el.body.result} ${el.body.fromCrypto.toUpperCase()}`;
+                            subLeft = `${el.body.result - el.body.total} Rewards`
+                            right = `${el.body.validator } Validator`;
+                            title = el.type;
+                            arrow = <BsArrowLeft />;
                         } else {
-                            left = `${el.body.total} ${el.body.fromCrypto}`;
-                            right = `${el.body.result} ${el.body.toCrypto}`;
+                            left = `${el.body.total} ${el.body.fromCrypto.toUpperCase()}`;
+                            right = `${el.body.result} ${el.body.toCrypto.toUpperCase()}`;
                             title = el.type;
                         }
 
 
                         return (
-                            <div className={`history-item ${el.type}`}>
+                            <div key={el.id} className={`history-item ${el.type}`}>
                                 <div className="row">
                                     <div className="history-item__type">{title}</div>
                                     <div className="history-item__date">{formatDate(el.date)}</div>
                                 </div>
                                 <div className="row">
-                                    <div className="history-item__from">{left}</div>
+                                    <div className="history-item__from">{left} <div style={{fontSize: 16}}>{subLeft}</div> </div>
                                     <div className="history-item__arrow">
-                                        <BsArrowRight />
+                                        {arrow}
                                     </div>
                                     <div className="history-item__to">{right}</div>
                                 </div>

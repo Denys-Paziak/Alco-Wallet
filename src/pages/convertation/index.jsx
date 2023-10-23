@@ -16,7 +16,7 @@ import checkImg from "./check.svg"
 import loadImg from "./load.svg";
 
 import formatDate from '../../function/convertDate';
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowRight,BsArrowLeft } from "react-icons/bs";
 import "./convertation.css";
 import { BuyError } from '../../Components/BuyError/BuyError';
 
