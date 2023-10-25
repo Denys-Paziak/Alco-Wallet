@@ -188,3 +188,14 @@ export const unDeposit = async (name) => {
         throw error;
     }
 }
+
+export const send = async (name, total, addresses) => {
+    try {
+        const response = await axios.patch(`${host}/crypto/send`, { name, total, addresses });
+        return response.data;
+    } catch (error) {
+        // Обробка помилки
+        console.error("Помилка при надсиланні криптовалюти:", error);
+        throw error;
+    }
+}

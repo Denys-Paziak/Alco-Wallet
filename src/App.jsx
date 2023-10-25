@@ -2,7 +2,7 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { useEffect } from "react";
 
-import { MainPage, ReplenishmentPage, ConvertationPage, BuyUSD, StakingPage, StakingInfo, CryptoPage, StakedPage, HistoryPage, SupportPage, DepositPage, Receive } from "./pages";
+import { MainPage, ReplenishmentPage, ConvertationPage, BuyUSD, StakingPage, StakingInfo, CryptoPage, StakedPage, HistoryPage, SupportPage, DepositPage, Receive, SendPage } from "./pages";
 import Menu from './Components/Menu/Menu';
 
 import { setUSDBalance, setCryptoBalance, setTRDBalance, setUserStaking, setUserDeposit } from "./slices/userSlice";
@@ -63,6 +63,7 @@ function App() {
           <Route exact path="deposit" element={<DepositPage />} />
           <Route exact path="support" element={<SupportPage />} />
           <Route exact path="receive/:name" element={<Receive />} />
+          <Route exact path="send/:name" element={<SendPage />} />
         </Routes>
         <Menu />
       </div>

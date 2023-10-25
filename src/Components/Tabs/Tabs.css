@@ -45,3 +45,17 @@
     border-radius: 20px;
     object-fit: cover;
 }
+
+.marketInfo {
+    padding: 10px 15px 20px;
+}
+
+.marketInfo .change {
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.marketInfo .price {
+    font-size: 22px;
+}

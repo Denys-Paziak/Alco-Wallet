@@ -57,17 +57,19 @@ const CryptoPage = () => {
                     </div>
 
                     <div className="balanceInfo__USD">
-                        <p>{user?.total / user?.courseOnDolar || 0} <span >USD</span></p>
+                        <p>{user?.total / user?.courseOnDolar || '0.00'} <span >USD</span></p>
                     </div>
                 </div>
                 <div className="сtyptoButtons">
                     <Link to={`/receive/${name}`}>
                         <button>Receive</button>
                     </Link>
-                    <button>Send</button>
+                    <Link to={`/send/${name}`}>
+                        <button>Send</button>
+                    </Link>
                 </div>
 
-                <Tabs name={market.symbol} />
+                <Tabs market={market} name={market.symbol} />
             </div >
         )
     }

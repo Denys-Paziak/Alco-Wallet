@@ -12,11 +12,14 @@ const CryptoChart = ({ chartData }) => {
                 display: false,
             },
         },
+        tension: 0.5
     };
 
     return (
         <div className='table-item__chart'>
-            <Line options={options} data={chartData} />
+            <div className='posithion'>
+                <Line width="300px" height="70px" options={options} data={chartData} />
+            </div>
         </div>
     );
 };

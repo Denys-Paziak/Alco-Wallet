@@ -4,6 +4,8 @@ import CryptoChart from '../../Components/CryptoChart/CryptoChart';
 import { Link } from "react-router-dom";
 
 import loadImg from "./load.svg";
+import red from "./red.svg";
+import green from "./green.svg";
 
 import "./MainPage.css";
 
@@ -43,7 +45,7 @@ const numPoints = 100;
 
 function generateRandomPatternArray(numPoints) {
     const array = [];
-    let value = Math.random() * 5; // Початкове випадкове значення
+    let value = Math.random() * 105; // Початкове випадкове значення
 
     for (let i = 0; i < numPoints; i++) {
         // Змінюємо значення на випадкову величину в межах [-2, 2]
@@ -121,6 +123,8 @@ export default function MainPage() {
                     <p className="table-item text-gray-400 text-lg font-semibold">No results found.</p>
                 ) : (
                     filteredMarket.map((crypto) => {
+                        const statusStyle = parseFloat(crypto.change) < 0 ? 'red' : 'green';
+
                         const randomPatternArray = generateRandomPatternArray(numPoints);
 
                         const data = {
@@ -129,20 +133,30 @@ export default function MainPage() {
                                 {
                                     label: 'Dataset 1',
                                     data: randomPatternArray,
-                                    borderColor: 'rgb(255, 99, 132)',
-                                    backgroundColor: 'rgb(255, 99, 132, 0)',
+                                    borderColor: statusStyle === 'red' ? 'rgb(254, 51, 51)' : 'rgb(0, 255, 71)',
+                                    fill: "start",
+                                    backgroundColor: statusStyle === 'red' ? (context) => {
+                                        const ctx = context.chart.ctx;
+                                        const gradient = ctx.createLinearGradient(0, -10, 0, 44);
+                                        gradient.addColorStop(0, "rgba(254, 51, 51, 0.4)");
+                                        gradient.addColorStop(1, "rgba(254, 51, 51 ,0)");
+                                        return gradient;
+                                    } : (context) => {
+                                        const ctx = context.chart.ctx;
+                                        const gradient = ctx.createLinearGradient(0, -10, 0, 44);
+                                        gradient.addColorStop(0, "rgba(0, 255, 71, 0.4)");
+                                        gradient.addColorStop(1, "rgba(0, 255, 71 ,0)");
+                                        return gradient;
+                                    },
+                                    
                                 },
                             ],
                         };
 
-
-                        const statusStyle = parseFloat(crypto.change) < 0 ? 'red' : 'green';
-
                         let name;
-                        let value;
-                        let valueTitle;
-                        let balance;
-                        let balanceTitle;
+                        let value = (cryptoBalance?.[crypto.symbol]?.total) * crypto.price;
+                        let balance = cryptoBalance?.[crypto.symbol]?.total;
+                        let cryptoChange;
 
                         if (crypto.name.length > 9) {
                             name = crypto.name.slice(0, 9) + "...";
@@ -150,21 +164,10 @@ export default function MainPage() {
                             name = crypto.name;
                         }
 
-                        if (cryptoBalance?.[crypto.symbol]?.total.toString().length > 9) {
-                            balance = cryptoBalance?.[crypto.symbol]?.total.toString().slice(0, 9) + "...";
-                            balanceTitle = cryptoBalance?.[crypto.symbol]?.total;
+                        if (crypto.change.toFixed(2) > 0) {
+                            cryptoChange = <><img src={green} alt="" /> {'+' + crypto.change.toFixed(2)}</> 
                         } else {
-                            balance = cryptoBalance?.[crypto.symbol]?.total;
-                        }
-
-
-
-
-                        if (((cryptoBalance?.[crypto.symbol]?.total) * crypto.price).toString().length > 9) {
-                            value = ((cryptoBalance?.[crypto.symbol]?.total) * crypto.price).toString().slice(0, 9) + "...";
-                            valueTitle = ((cryptoBalance?.[crypto.symbol]?.total) * crypto.price);
-                        } else {
-                            value = ((cryptoBalance?.[crypto.symbol]?.total) * crypto.price);
+                            cryptoChange = <><img src={red} alt="" /> {crypto.change.toFixed(2)}</> 
                         }
 
                         return (
@@ -174,12 +177,12 @@ export default function MainPage() {
                                     <p>{name}</p>
                                 </div>
                                 <div className='table-item__balance'>
-                                    <span className='total' title={balanceTitle}>{balance || 0} </span>
+                                    <span className='total' title={balance}>{formatNumber(balance) || 0} </span>
                                     <span className='symbol'>{crypto.symbol.toUpperCase()}</span>
                                 </div>
-                                <p className='table-item__value' title={valueTitle}>{value || 0}</p>
-                                <p className='table-item__price'>${crypto.price}</p>
-                                <p className={`table-item__24h ${statusStyle}`}>{crypto.change.toFixed(2)}</p>
+                                <p className='table-item__value' title={value}>${formatNumber(value) || 0}</p>
+                                <p className='table-item__price'>${formatNumber(crypto.price)}</p>
+                                <p className={`table-item__24h ${statusStyle}`}>{cryptoChange}</p>
                                 {/* Відобразіть дані про портфоліо для кожної криптовалюти */}
                                 <div className='table-item__chart'>
                                     <CryptoChart chartData={data} />
@@ -191,4 +194,26 @@ export default function MainPage() {
             </div>
         );
     }
+}
+
+function formatNumber(number) {
+if (typeof number !== 'number' || isNaN(number)) {
+    console.log(number)
+
+    return false;
+}
+
+// Округлюємо число до 2 десяткових знаків
+const roundedNumber = Math.round(number * 100) / 100;
+
+// Розділяємо цілу та десяткову частини
+const parts = roundedNumber.toString().split('.');
+const integerPart = parts[0];
+const decimalPart = parts[1] || '00';
+
+// Форматуємо цілу частину, розділяючи тисячі комою
+const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+// Повертаємо сформатоване число
+return `${formattedIntegerPart}.${decimalPart}`;
 }

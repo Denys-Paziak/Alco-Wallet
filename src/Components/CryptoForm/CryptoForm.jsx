@@ -1,21 +1,24 @@
 import React from 'react';
 
-const CryptoForm = ({ readOnly, inputHandler, inputValue, limitedValidator}) => {
+const CryptoForm = ({ readOnly, inputHandler, inputValue, limitedValidator, testRegular = true}) => {
     const handleChange = (e) => {
         if (!readOnly) {
-            const testRegular = /^(\d+\.{0,1}|\d*)(\d{0,18})?$/g.test(e.target.value);
+            if (testRegular) {
+                const testRegular = /^(\d+\.{0,1}|\d*)(\d{0,18})?$/g.test(e.target.value);
 
-
-
-            inputHandler((state) => {
-                if (testRegular) {
-                    limitedValidator(e.target.value);
-                    return e.target.value;
-                } else {
-                    limitedValidator(state);
-                    return state;
-                }
-            });
+                inputHandler((state) => {
+                    if (testRegular) {
+                        limitedValidator(e.target.value);
+                        return e.target.value;
+                    } else {
+                        limitedValidator(state);
+                        return state;
+                    }
+                });
+            } else {
+                inputHandler(e.target.value)
+            }
+            
         }
     };
 

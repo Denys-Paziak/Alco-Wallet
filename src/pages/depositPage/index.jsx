@@ -190,7 +190,7 @@ export default function DepositPage() {
                                         <>
                                             <div className="currencyCrypto">
                                                 <p className={"crypto" + (userSelectCripto.name === "usdc" ? " active" : "")} onClick={onSelectCrypto} data-crypto={"usdc"}>USDC</p>
-                                                <p className={"crypto" + (userSelectCripto.name === "usdd" ? " active" : "")} onClick={onSelectCrypto} data-crypto={"usdd"}>USDD</p>
+                                                <p className={"crypto" + (userSelectCripto.name === "usdt" ? " active" : "")} onClick={onSelectCrypto} data-crypto={"usdt"}>USDT</p>
                                             </div>
                                             <div className="balanceCrypto"><span>Your balance:</span> <span title={userSelectCripto.total}>{(userSelectCripto.total + "").substr(0, 7)} <span>{userSelectCripto.name}</span></span></div>
                                             <div className="labelForm">Amount</div>

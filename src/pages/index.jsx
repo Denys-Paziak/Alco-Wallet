@@ -10,6 +10,7 @@ import HistoryPage from "./history";
 import DepositPage from "./depositPage";
 import SupportPage from "./support";
 import Receive from "./receive";
+import SendPage from "./sendPage"
 
 
 export {
@@ -24,5 +25,6 @@ export {
     HistoryPage,
     DepositPage,
     SupportPage,
-    Receive
+    Receive,
+    SendPage
 }
