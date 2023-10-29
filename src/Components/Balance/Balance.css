@@ -5,6 +5,10 @@
     margin-top: 25px;
 }
 
+.balance a {
+    color: #fff;
+}
+
 .balance__title {
     color: var(--text);
     font-size: 14.17px;

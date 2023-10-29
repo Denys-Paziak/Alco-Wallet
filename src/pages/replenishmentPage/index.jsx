@@ -243,7 +243,7 @@ const InstantExchange = () => {
                     onClick={buttonHandler}
                     disabled={!check || isLoading || (limitedInput !== "value")} // Вимикаємо кнопку під час завантаження
                 >
-                    {isLoading ? 'Loading...' : 'Exchange'}
+                    {isLoading ? 'Loading...' : 'Buy'}
                 </button>
                 {notification && (
                     <div className={`notification ${notification.isSuccess ? 'success' : 'error'}`}>

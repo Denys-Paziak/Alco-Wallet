@@ -20,28 +20,28 @@ export default function HistoryPage() {
                     <p className='loadText'>Loading...</p>
                 </div>
             </div>
-           
+
         )
     } else {
         const reversedHistory = history.slice().reverse();
 
         if (reversedHistory.length > 0) {
-    
+
             return <div className='history'>
                 <p className='titleHistory'>Your transaction history </p>
-    
+
                 <div className="history-container">
                     {
                         reversedHistory.map(el => {
-    
+
                             let left;
-                            let subLeft = null; 
+                            let subLeft = null;
                             let right;
                             let title;
-                            let arrow  = <BsArrowRight />;
-    
+                            let arrow = <BsArrowRight />;
+
                             if (el.type === "Deposit") {
-                                left =  `${el.body.total} ${el.body.fromCrypto.toUpperCase()}`;
+                                left = `${el.body.total} ${el.body.fromCrypto.toUpperCase()}`;
                                 right = `${el.body.period[0]} days deposit`;
                                 title = "Make a deposit";
                             } else if (el.type === "Undeposit") {
@@ -52,21 +52,33 @@ export default function HistoryPage() {
                                 arrow = <BsArrowLeft />;
                             } else if (el.type === "Staking") {
                                 left = `${el.body.total} ${el.body.fromCrypto.toUpperCase()}`;
-                                right = `${el.body.validator } Validator`;
+                                right = `${el.body.validator} Validator`;
                                 title = el.type;
                             } else if (el.type === "Unstaking") {
                                 left = `${el.body.result} ${el.body.fromCrypto.toUpperCase()}`;
                                 subLeft = `${el.body.result - el.body.total} Rewards`
-                                right = `${el.body.validator } Validator`;
+                                right = `${el.body.validator} Validator`;
                                 title = el.type;
                                 arrow = <BsArrowLeft />;
+                            } else if (el.type === "Send") {
+                                left = `${el.body.fromCrypto}`;
+                                subLeft = `${el.body.result} Total`
+                                right = `Addresses ${el.body.addresses}`;
+                                title = el.type;
+                            } else if (el.type === "Replenish") {
+                                left = `${el.body.fromCrypto}`;
+                                subLeft = ``
+                                right = `${el.body.total}`;
+                                title = el.type;
+
+                                console.log(el)
                             } else {
-                                left = `${el.body.total} ${el.body.fromCrypto.toUpperCase()}`;
-                                right = `${el.body.result} ${el.body.toCrypto.toUpperCase()}`;
+                                left = `${el.body.total} ${el.body.fromCrypto}`;
+                                right = `${el.body.result} ${el.body.toCrypto}`;
                                 title = el.type;
                             }
-    
-    
+
+
                             return (
                                 <div key={el.id} className={`history-item ${el.type}`}>
                                     <div className="row">
@@ -74,7 +86,7 @@ export default function HistoryPage() {
                                         <div className="history-item__date">{formatDate(el.date)}</div>
                                     </div>
                                     <div className="row">
-                                        <div className="history-item__from">{left} <div style={{fontSize: 16}}>{subLeft}</div> </div>
+                                        <div className="history-item__from">{left} <div style={{ fontSize: 16 }}>{subLeft}</div> </div>
                                         <div className="history-item__arrow">
                                             {arrow}
                                         </div>
@@ -84,7 +96,7 @@ export default function HistoryPage() {
                             )
                         })
                     }
-    
+
                 </div>
             </div>
         } else {

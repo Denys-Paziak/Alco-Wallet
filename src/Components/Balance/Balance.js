@@ -12,8 +12,10 @@ const Balance = () => {
         <div className="balance">
             <img src='/logo.svg' alt='' />
             <p className='balance__title'>Algo Wallet</p>
-            <h2 className='balance__total'>{USDBalance}</h2>
-            {/* <NavLink to="/buyUSD" >buy</NavLink> */}
+            <NavLink to="/buyUSD" activeClassName="active">
+                <h2 className='balance__total'>{USDBalance}</h2>
+            </NavLink>
+
         </div>
     );
 };
