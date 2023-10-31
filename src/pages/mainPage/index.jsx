@@ -148,7 +148,7 @@ export default function MainPage() {
                                         gradient.addColorStop(1, "rgba(0, 255, 71 ,0)");
                                         return gradient;
                                     },
-                                    
+
                                 },
                             ],
                         };
@@ -165,9 +165,9 @@ export default function MainPage() {
                         }
 
                         if (crypto.change.toFixed(2) > 0) {
-                            cryptoChange = <><img src={green} alt="" /> {'+' + crypto.change.toFixed(2)}</> 
+                            cryptoChange = <><img src={green} alt="" /> {'+' + crypto.change.toFixed(2)}</>
                         } else {
-                            cryptoChange = <><img src={red} alt="" /> {crypto.change.toFixed(2)}</> 
+                            cryptoChange = <><img src={red} alt="" /> {crypto.change.toFixed(2)}</>
                         }
 
                         return (
@@ -197,23 +197,21 @@ export default function MainPage() {
 }
 
 function formatNumber(number) {
-if (typeof number !== 'number' || isNaN(number)) {
-    console.log(number)
+    if (typeof number !== 'number' || isNaN(number)) {
+        return false;
+    }
 
-    return false;
-}
+    // Округлюємо число до 2 десяткових знаків
+    const roundedNumber = Math.round(number * 100) / 100;
 
-// Округлюємо число до 2 десяткових знаків
-const roundedNumber = Math.round(number * 100) / 100;
+    // Розділяємо цілу та десяткову частини
+    const parts = roundedNumber.toString().split('.');
+    const integerPart = parts[0];
+    const decimalPart = parts[1] || '00';
 
-// Розділяємо цілу та десяткову частини
-const parts = roundedNumber.toString().split('.');
-const integerPart = parts[0];
-const decimalPart = parts[1] || '00';
+    // Форматуємо цілу частину, розділяючи тисячі комою
+    const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-// Форматуємо цілу частину, розділяючи тисячі комою
-const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-// Повертаємо сформатоване число
-return `${formattedIntegerPart}.${decimalPart}`;
+    // Повертаємо сформатоване число
+    return `${formattedIntegerPart}.${decimalPart}`;
 }

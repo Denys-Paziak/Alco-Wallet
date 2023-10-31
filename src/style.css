@@ -18,7 +18,7 @@
   background: #c9c9c956;
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   background: inherit;
 }
 
@@ -130,6 +130,7 @@ input {
 .loadBlock .loadImg {
   margin-bottom: 10px;
 }
+
 .history {
   display: flex;
   flex-direction: column;
@@ -162,7 +163,7 @@ input {
 }
 
 .history-item.Staking .history-item__arrow,
-.history-item.Deposit .history-item__arrow  {
+.history-item.Deposit .history-item__arrow {
   color: red;
 }
 
@@ -188,4 +189,43 @@ input {
 .history-item__arrow {
   color: var(--main);
   font-size: 30px;
+}
+
+.login {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg);
+  z-index: 1000;
+}
+
+.login input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--main);
+  outline: none;
+  padding: 10px;
+}
+
+.login .col {
+  font-size: 12px;
+}
+
+.login h2 {
+  margin-bottom: 20px;
+}
+
+.login button {
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 10px 30px;
+  margin-top: 20px;
+  font-weight: bold;
+  border: none;
 }
